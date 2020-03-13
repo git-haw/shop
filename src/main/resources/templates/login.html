@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>用户登录</title>
+        <link type="text/css" rel="stylesheet" href="/static/css/login/login.css"/>
+        <script type="text/javascript" src="/static/js/login.js">
+        </script>
+        <script type="text/javascript" src="/static/js/jquery.min.js">
+        </script>
+        <script type="text/javascript">
+            $(function(){
+                $(window).load(function(){
+                
+                    var  checkResult = false;
+                    var checkPasswordResult = false;
+                    var checkCodeResult = false;
+                    var checkNameResult = false;
+                    
+                    createCode();
+                    $("#checkCode").click(function(){
+                        createCode();
+                    });
+                    
+                    $("#name").blur(function(){
+                        checkNameResult = checkName();
+                    });
+                    $("#pwd").blur(function(){
+                        checkPasswordResult = checkPassword();
+                    });
+                    $("#input_code").blur(function(){
+                        checkCodeResult = checkCode();
+                     });
+                    $("#login").click(function(){
+                    	checkResult = checkNameResult && checkPasswordResult && checkCodeResult;
+//                    	alert(checkNameResult);
+//                    	alert(checkPasswordResult);
+//                    	alert(checkCodeResult);
+//                    	alert(checkResult);
+                        if (checkResult) {
+                        	$.ajax({
+								type:"POST",
+								url: "/user/login",
+								data:{
+									name: document.getElementById("name").value,
+									password: document.getElementById("pwd").value
+								},
+								dataType:"text",
+								async: false,
+								success: function(data, textStatus){
+                                    if(data == "true"){
+                                        location.href = "/index";
+                                    }else{
+                                        $("#checkName").text("用户名或者密码错误！");
+                                    }
+								}
+							});
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="main">
+            <div id="form_1">
+            </div>
+            <div id="form_2">
+                <form id="loginForm" action="/user/login">
+                    <label>
+                        登录账号/邮箱
+                    </label>
+                    <br/>
+                    <input type="text" id="name" name="name" style="height: 30px; width: 250px; border: 2px solid #E3393C; border-radius: 7px;" placeholder="请输入正确的邮箱" required/><span id="checkName" style="float: right; color: #FF0000; font-size: 12px;"></span>
+                    <br/>
+                    <br/>
+                    <label>
+                        密码
+                    </label>
+                    <br/>
+                    <input type="password" id="pwd" name="password" style="height: 30px; width: 250px; border: 2px solid #E3393C; border-radius: 7px;" placeholder="密码长度在6~20位" required/><span id="checkpw" style="float: right; color: #FF0000; font-size: 12px;"></span>
+                    <br/>
+                    <br/>
+                    <label>
+                        验证码：
+                    </label>
+                    <input type="text" size="5" id="input_code" style="height: 30px; width: 100px; border: 2px solid #E3393C; border-radius: 7px;" placeholder="请输入验证码" required/><span id="checkCode" style="background-color: #006699; font-size: 25px; font-style: italic; color: #FFFFFF;"></span>
+                    <span id="Code" style="float: right; color: #FF0000; font-size: 12px;"></span>
+                    <br/>
+                    <br/>
+                    <input type="button" id="login" value="登录" style="height: 40px; color: #FFFFFF; width: 250px; background-color: #FF0000; border-radius: 7px;"/>
+                </form>
+                <br/>
+                <br/>
+                <span><a href="/register">申请注册</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><a href="#">忘记密码？</a></span>
+            </div>
+        </div>
+    </body>
+</html>

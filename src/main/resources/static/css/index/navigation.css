@@ -1,0 +1,105 @@
+img.catear{
+    position: absolute;
+    height: 15px;
+    display: none;
+}
+div.headBar{
+    background-color: #DD2727;
+}
+div.navigation{
+    position: relative;
+}
+div.navigation div.headBar div.assortment{
+    margin-left: 163.5px;
+    width: 200px;
+    background-color: #C60A0A;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+}
+div.navigation div.headBar div.rightMenu{
+    display: inline-block;
+}
+div.navigation div.headBar div.rightMenu span{
+    margin: 0px 20px;
+}
+div.navigation div.headBar div.rightMenu img{
+    height: 30px;
+}
+div.navigation div.headBar div.rightMenu a{
+    font-size: 16px;
+    color: white;
+}
+div.carousel-inner img{
+    width: 100%;
+}
+div.carouselBackground{
+    position: absolute;
+    width: 100%;
+    height: 510px;
+    top: 36px;
+    background-color: #e8e8e8;
+    z-index: -1;
+}
+div.categoryMenu{
+    position: absolute;
+    width: 200px;
+    left: 163.5px;
+    background-color: #e2e2e3;
+    z-index: 1;
+}
+div.categoryMenu ul{
+    list-style: none;
+    display: block;
+    margin-bottom: 0px;
+}
+div.categoryMenu ul li{
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+div.categoryMenu ul li span{
+    margin-right: 15px;
+}
+div.categoryMenu ul li a{
+    color: #000;
+}
+div.categoryMenu ul li a:hover{
+    text-decoration: none;
+}
+div.productsAsideCategory{
+    position: absolute;
+    left: 315.5px;
+    width: 825px;
+    height: 510px;
+    background-color: white;
+    z-index: 1;
+}
+div.productsAsideCategory div.row{
+    margin: 20px 80px 0px 80px;
+}
+div.productsAsideCategory a{
+    color: #999;
+    font-size: 14px;
+    margin: 8px;
+}
+div.productsAsideCategory a:hover{
+    color: #c40000;
+    text-decoration: none;
+}
+div.productsAsideCategory div.segment{
+    margin-top: 20px;
+    border-bottom: 1px dashed #e7e7e7;
+}
+div#carousel-example-generic{
+    width: 1024px;
+    height: 510px;
+    margin: 0px auto;
+}
+img.carouselImage{
+    height: 510px !important;
+}

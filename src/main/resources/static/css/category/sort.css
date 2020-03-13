@@ -1,0 +1,27 @@
+div.categorySortBar {
+    background-color: #FAF9F9;
+    margin: 40px 20px 20px 20px;
+    padding: 4px;
+}
+table.categorySortBarTable {
+    border-collapse: collapse;
+    display: inline-table;
+}
+table.categorySortBarTable td {
+    border: 1px solid #CCCCCC;
+    padding: 3px;
+    height: 23px;
+}
+table.categorySortBarTable td.grayColumn {
+    background-color: #F1EDEC;
+}
+table.categorySortBarTable td a {
+    color: #806F66;
+    font-size:12px;
+}
+table.categorySortBarTable input {
+    border-width: 0px;
+    height: 100%;
+    width: 50px;
+    font-size:12px;
+}

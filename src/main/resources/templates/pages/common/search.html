@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<div  th:fragment="search">
+    <link href="/static/css/common/search.css" rel="stylesheet"/>
+    <div class="searchOutDiv">
+        <a href="/tmall">
+            <img src="/static/img/site/logo.gif" class="logo">
+        </a>
+        <div class="searchDiv">
+            <input type="text" value="" placeholder="时尚男鞋  太阳镜">
+            <button type="submit" class="searchButton">搜索</button>
+            <div class="searchBelow">
+                <span>
+                    <a href="#">平衡车</a>
+                    <span>|</span>
+                </span>
+                <span>
+                    <a href="#">扫地机器人</a>
+                    <span>|</span>
+                </span>
+                <span>
+                    <a href="#">原汁机</a>
+                    <span>|</span>
+                </span>
+                <span>
+                    <a href="#">冰箱</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

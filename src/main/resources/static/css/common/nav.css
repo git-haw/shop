@@ -1,0 +1,25 @@
+a:hover{
+    text-decoration: none;
+    color: #c40000;
+}
+nav.top{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e7e7e7;
+}
+nav.top{
+    background-color: #f2f2f2;
+}
+div.top_middle{
+    max-width: 1024px;
+    margin: 0px auto;
+}
+nav.top span, nav.top a{
+    color: #999;
+    margin: 0px 10px 0px 10px;
+}
+nav.top a:hover{
+    color: #c40000;
+}

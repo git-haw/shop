@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body{
+    font-size: 12px;
+    font-family: Arial;
+    min-width: 1024px;
+    /*width: 1920px;*/
+}
