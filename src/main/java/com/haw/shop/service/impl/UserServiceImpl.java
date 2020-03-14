@@ -33,7 +33,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(String name, String password) {
+    /**
+     * 根据用户名、手机号码、邮箱和密码查询用户
+     */
+    public UserInfo findUserByLogin(String name, String password) {
         UserInfo userInfo1 = new UserInfo();
         userInfo1.setName(name);
         userInfo1.setPassword(password);
@@ -47,11 +50,12 @@ public class UserServiceImpl implements UserService {
         userInfo3.setPassword(password);
         UserInfo rst3 = userInfoMapper.selectOne(userInfo3);
 
-        if (rst1 != null || rst3 != null || rst2 != null) {
-            UserInfo userInfo = (rst1 != null ? rst1 : (rst3 != null ? rst3 : rst2));
-            String token = TokenUtil.getToken(userInfo.getId());
-            return token;
+        if(rst1!=null){
+            return rst1;
+        }else if(rst3!=null){
+            return rst3;
         }
-        return "";
+        return rst2;
     }
+
 }

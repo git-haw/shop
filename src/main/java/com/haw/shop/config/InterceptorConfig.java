@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.*;
 public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/index").setViewName("index");
         registry.addViewController("/register").setViewName("register");
         registry.addViewController("/login").setViewName("login");
     }

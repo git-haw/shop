@@ -9,5 +9,5 @@ import com.haw.shop.model.UserInfo;
 public interface UserService {
     UserInfo getUser(Integer id);
     UserInfo register(UserInfo user);
-    String login(String name, String password);
+    UserInfo findUserByLogin(String name, String password);
 }
