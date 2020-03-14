@@ -2,8 +2,10 @@ package com.haw.shop.controller;
 
 import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
+import com.haw.shop.token.UserLoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +22,7 @@ public class UserController {
 
     @RequestMapping("/{id}")
     @ResponseBody
-    public UserInfo test(@PathVariable("id") Long id){
+    public UserInfo test(@PathVariable("id") Integer id){
         return userService.getUser(id);
     }
 
@@ -32,9 +34,16 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public boolean login(String name, String password){
-        boolean loginResult = userService.login(name,password);
-        return loginResult;
+    public String login(String name, String password){
+        String token = userService.login(name,password);
+        return token;
+}
+
+    @UserLoginToken
+    @GetMapping("/getMessage")
+    @ResponseBody
+    public String getMessage(){
+        return "你已通过验证";
     }
 
 }

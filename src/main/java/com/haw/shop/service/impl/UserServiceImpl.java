@@ -3,6 +3,7 @@ package com.haw.shop.service.impl;
 import com.haw.shop.mapper.UserInfoMapper;
 import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
+import com.haw.shop.token.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public UserInfo getUser(Long id) {
+    public UserInfo getUser(Integer id) {
         return userInfoMapper.selectByPrimaryKey(id);
     }
 
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String name, String password) {
+    public String login(String name, String password) {
         UserInfo userInfo1 = new UserInfo();
         userInfo1.setName(name);
         userInfo1.setPassword(password);
@@ -47,8 +48,10 @@ public class UserServiceImpl implements UserService {
         UserInfo rst3 = userInfoMapper.selectOne(userInfo3);
 
         if (rst1 != null || rst3 != null || rst2 != null) {
-            return true;
+            UserInfo userInfo = (rst1 != null ? rst1 : (rst3 != null ? rst3 : rst2));
+            String token = TokenUtil.getToken(userInfo.getId());
+            return token;
         }
-        return false;
+        return "";
     }
 }

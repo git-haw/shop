@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "UserInfo")
 public class UserInfo {
 
+    @Id
     private Integer id;
 
     private String name;

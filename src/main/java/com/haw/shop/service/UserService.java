@@ -7,7 +7,7 @@ import com.haw.shop.model.UserInfo;
  * Created by haw on 17-8-30.
  */
 public interface UserService {
-    UserInfo getUser(Long id);
+    UserInfo getUser(Integer id);
     UserInfo register(UserInfo user);
-    boolean login(String name, String password);
+    String login(String name, String password);
 }
