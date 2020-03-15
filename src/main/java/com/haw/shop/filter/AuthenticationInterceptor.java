@@ -8,7 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
 import com.haw.shop.token.PassToken;
-import com.haw.shop.token.UserLoginToken;
+import com.haw.shop.token.LoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -50,8 +50,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             }
         }
         //检查有没有需要用户权限的注解
-        if (method.isAnnotationPresent(UserLoginToken.class)) {
-            UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
+        if (method.isAnnotationPresent(LoginToken.class)) {
+            LoginToken userLoginToken = method.getAnnotation(LoginToken.class);
             if (userLoginToken.required()) {
                 // 执行认证
                 if (token == null) {
