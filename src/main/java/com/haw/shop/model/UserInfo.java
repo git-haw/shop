@@ -5,8 +5,9 @@ import javax.persistence.*;
 
 @Table(name = "UserInfo")
 public class UserInfo {
-
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -23,6 +24,9 @@ public class UserInfo {
 
     @Column(name = "register_date")
     private Date registerDate;
+
+    @Column(name = "shop_id")
+    private Integer shopId;
 
     /**
      * @return id
@@ -134,5 +138,19 @@ public class UserInfo {
      */
     public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
+    }
+
+    /**
+     * @return shop_id
+     */
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    /**
+     * @param shopId
+     */
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
     }
 }

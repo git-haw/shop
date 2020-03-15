@@ -3,7 +3,7 @@ package com.haw.shop.controller;
 import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
 import com.haw.shop.token.TokenUtil;
-import com.haw.shop.token.UserLoginToken;
+import com.haw.shop.token.LoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,7 +65,7 @@ public class UserController {
         return new ModelAndView("/login");
     }
 
-    @UserLoginToken
+    @LoginToken
     @GetMapping("/getMessage")
     @ResponseBody
     public String getMessage() {
