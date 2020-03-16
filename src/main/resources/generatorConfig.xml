@@ -57,7 +57,7 @@
         <!-- type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象 -->
         <!-- type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象 -->
         <!-- type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口 -->
-        <javaClientGenerator targetPackage="com.haw.shop.mapper" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.haw.shop.mapper" targetProject="src/main/java" type="ANNOTATEDMAPPER">
             <!-- 是否在当前路径下新加一层schema,false路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
@@ -75,13 +75,12 @@
         <!--&lt;!&ndash; 指定列的java数据类型 &ndash;&gt;-->
         <!--&lt;!&ndash; <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> &ndash;&gt;-->
         <!--</table>-->
-        <table tableName="UserInfo" domainObjectName="UserInfo" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="product" domainObjectName="product" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" selectByPrimaryKeyQueryId="false">
             <property name="selectAllOrderByClause" value="id desc"/>
             <!--mysql 配置-->
-            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
-            <!--SqlServer 配置-->
-            <generatedKey column="id" sqlStatement="SqlServer" identity="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <!--SqlServer 不用配置-->
             <!--oracle 配置-->
             <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
         </table>
