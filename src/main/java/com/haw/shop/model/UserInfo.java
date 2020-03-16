@@ -3,7 +3,7 @@ package com.haw.shop.model;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "UserInfo")
+@Table(name = "user_info")
 public class UserInfo {
     @Id
     @Column(name = "id")
