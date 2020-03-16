@@ -49,7 +49,7 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("userid", userInfo.getId());
             session.setAttribute("token", token);
-//            result.put("userid", userInfo.getId());
+            result.put("userid", userInfo.getId());
             result.put("token", token);
             result.put("flag", 1);
         } else {
