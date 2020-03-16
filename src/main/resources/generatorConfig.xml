@@ -13,6 +13,8 @@
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="com.haw.shop.util.BaseDao"/>
+            <property name="forceAnnotation" value="true"/>
+            <property name="caseSensitive" value="true"/>
         </plugin>
 
         <!-- 注释 -->
@@ -75,7 +77,7 @@
         <!--&lt;!&ndash; 指定列的java数据类型 &ndash;&gt;-->
         <!--&lt;!&ndash; <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> &ndash;&gt;-->
         <!--</table>-->
-        <table tableName="product" domainObjectName="product" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="describe" domainObjectName="Describe" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" selectByPrimaryKeyQueryId="false">
             <property name="selectAllOrderByClause" value="id desc"/>
             <!--mysql 配置-->
