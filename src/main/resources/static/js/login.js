@@ -63,3 +63,58 @@ function checkPassword() {
 	}
 
 }
+
+
+$(function () {
+	$(window).load(function () {
+
+		var checkResult = false;
+		var checkPasswordResult = false;
+		var checkCodeResult = false;
+		var checkNameResult = false;
+
+		createCode();
+		$("#checkCode").click(function () {
+			createCode();
+		});
+
+		$("#name").blur(function () {
+			checkNameResult = checkName();
+		});
+		$("#pwd").blur(function () {
+			checkPasswordResult = checkPassword();
+		});
+		$("#input_code").blur(function () {
+			checkCodeResult = checkCode();
+		});
+		$("#login").click(function () {
+			checkResult = true;//checkNameResult && checkPasswordResult && checkCodeResult;
+//                    	alert(checkNameResult);
+//                    	alert(checkPasswordResult);
+//                    	alert(checkCodeResult);
+//                    	alert(checkResult);
+			if (checkResult) {
+				$.ajax({
+					type: "POST",
+					url: "/user/login",
+					data: {
+						name: document.getElementById("name").value,
+						password: document.getElementById("pwd").value
+					},
+					dataType: "text",
+					async: false,
+					success: function (data, textStatus) {
+						data = JSON.parse(data);
+						if (data.flag == 1) {
+							$.cookie('userid', data.userid, {expires: 1, path: '/'});
+							$.cookie('token', data.token, {expires: 1, path: '/'});
+							location.href = "/index";
+						} else {
+							$("#checkName").text("用户名或者密码错误！");
+						}
+					}
+				});
+			}
+		});
+	});
+});
