@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>商品类别</title>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <link href="/static/primary/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/product_type/view.css" rel="stylesheet"/>
+    <script src="/static/primary/plugins/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="/static/js/product_type/view.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="main">
+        <div class="card">
+            <div></div>
+            <div class="items">
+                <ul class="">
+                    <li th:each="productType0,ptStat0:${result?.list0}">
+                        <div class="root-product-type">
+                            <div class="expand">
+                                <input type="hidden" name="id" th:value="${productType0.id}">
+                                <input type="hidden" name="parentId" th:value="${productType0.parentId}">
+                                <span th:text="${productType0.name}">游戏话费</span>
+                                <i class="glyphicon glyphicon-chevron-down"></i>
+                            </div>
+                            <div class="add">
+                                <i class="glyphicon glyphicon glyphicon-plus" data-toggle="modal"
+                                   data-target="#modal_product_type"></i>
+                            </div>
+                        </div>
+                        <div class="root-product-type-item">
+                            <ul class="">
+                                <li th:each="productType1,ptStat1:${result?.list1}" th:if="${productType1.parentId==productType0.id}">
+                                    <span th:text="${productType1.name}">士大夫</span>
+                                    <span><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <button id="add_root_product_type" class="btn btn-default" data-toggle="modal"
+                        data-target="#modal_product_type">增加根商品分类
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="modal_product_type" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">添加商品分类</h4>
+                </div>
+                <div class="modal-body">
+                    <label>商品分类名称：</label>
+                    <input type="text" name="name" id="name">
+                    <input type="hidden" name="parentId" id="parentId" value="-1">
+                    <span id="tip" class="tip"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="add_product_type">添加</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+</body>
+</html>
