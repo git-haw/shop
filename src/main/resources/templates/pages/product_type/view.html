@@ -26,8 +26,10 @@
                                 <span th:text="${productType0.name}">游戏话费</span>
                                 <i class="glyphicon glyphicon-chevron-down"></i>
                             </div>
-                            <div class="add">
-                                <i class="glyphicon glyphicon glyphicon-plus" data-toggle="modal"
+                            <div class="saveorupdate">
+                                <i class="glyphicon glyphicon-plus" data-toggle="modal"
+                                   data-target="#modal_product_type"></i>
+                                <i class="glyphicon glyphicon-pencil" data-toggle="modal"
                                    data-target="#modal_product_type"></i>
                             </div>
                         </div>
@@ -42,8 +44,10 @@
                                             <span th:text="${productType1.name}">士大夫</span>
                                             <i class="glyphicon glyphicon-chevron-right"></i>
                                         </div>
-                                        <div class="add">
-                                            <i class="glyphicon glyphicon glyphicon-plus" data-toggle="modal"
+                                        <div class="saveorupdate">
+                                            <i class="glyphicon glyphicon-plus" data-toggle="modal"
+                                               data-target="#modal_product_type"></i>
+                                            <i class="glyphicon glyphicon-pencil" data-toggle="modal"
                                                data-target="#modal_product_type"></i>
                                         </div>
                                     </div>
@@ -72,9 +76,11 @@
                                 <span>游戏话费</span>
                                 <i class="glyphicon glyphicon-chevron-down"></i>
                             </div>
-                            <div class="add">
-                                <i class="glyphicon glyphicon glyphicon-plus" data-toggle="modal"
-                                   data-target="#modal_product_type"></i>
+                            <div class="saveorupdate">
+                                <i class="glyphicon glyphicon-plus" data-toggle="modal"
+                                               data-target="#modal_product_type"></i>
+                                            <i class="glyphicon glyphicon-pencil" data-toggle="modal"
+                                               data-target="#modal_product_type"></i>
                             </div>
                         </div>
                     </li>
@@ -95,12 +101,13 @@
                 <div class="modal-body">
                     <label>商品分类名称：</label>
                     <input type="text" name="name" id="name">
-                    <input type="hidden" name="parentId" id="parentId" value="-1">
-                    <span id="tip" class="msg"></span>
+                    <input type="hidden" name="id" id="productTypeId">
+                    <input type="hidden" name="parentId" id="parentId">
+                    <span id="msg" class="msg"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" id="add_product_type">添加</button>
+                    <button type="button" class="btn btn-primary" id="add_product_type">保存</button>
                 </div>
             </div>
             <!-- /.modal-content -->

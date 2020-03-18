@@ -14,10 +14,22 @@ function Card(){
             var productTypeId = $(this).children("input[name=id]").val();
             Card.prototype.loadNextCard(cardNo,productTypeId);
         });
-        card.on("click",".add>i",function(){
-            var id = $(this).parent().prev().children("input[name=id]").val();
-            $("#parentId").val(id);
+        card.on("click",".saveorupdate>i",function(){
+            Card.prototype.preInitSaveorupdate($(this));
         });
+    }
+    //添加或者编辑商品类别信息的预处理
+    Card.prototype.preInitSaveorupdate = function(obj){
+        var id = obj.parent().prev().children("input[name=id]").val();
+        if(obj.hasClass('glyphicon-plus')){
+            $("#parentId").val(id);
+            $("#myModalLabel").text('添加商品分类');
+        }else{
+            $("#productTypeId").val(id);
+            var name = obj.parent().prev().children("span").text();
+            $("#name").val(name);
+            $("#myModalLabel").text('编辑商品分类');
+        }
     }
     //移除当前card之后的card
     Card.prototype.removeCardAfter = function(cardNo){
@@ -69,10 +81,12 @@ function Card(){
             load.append(parentId);
             load.append(span);
             load.append(i_down);
-            var add = $('<div class="add"></div>');
-            itemcontainer.append(add);
-            var i_plus = $('<i class="glyphicon glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
-            add.append(i_plus);
+            var saveorupdate = $('<div class="saveorupdate"></div>');
+            itemcontainer.append(saveorupdate);
+            var i_plus = $('<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
+            var i_pencil = $('<i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal_product_type"></i>');
+            saveorupdate.append(i_plus);
+            saveorupdate.append(i_pencil);
         }
         return card;
     }

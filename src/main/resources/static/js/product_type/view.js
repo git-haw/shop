@@ -5,6 +5,7 @@
 $(function () {
     //添加商品分类标志
     var g_add_flag=false;
+    var card = new Card();
     //展开收起根分类
     $("#main .card .items>ul .itemcontainer>.expand").click(function () {
         $(this).parent().next().toggleClass("unvisable");
@@ -18,25 +19,24 @@ $(function () {
         }
     });
     //根分类添加
-    $("#main .card .items>ul .itemcontainer>.add>i").each(function(i){
+    $("#main .card .items .saveorupdate>i").each(function(i){
         $(this).click(function(){
-            var id = $(this).parent().prev().children("input[name=id]").val();
-            $("#parentId").val(id);
+            card.preInitSaveorupdate($(this));
         });
     });
     //二级分类添加
-    $("#main .card .items>ul .subcontainer .subitemcontainer>.add>i").each(function(i){
+    /*$("#main .card .items>ul .subcontainer .subitemcontainer>.saveorupdate>i").each(function(i){
         $(this).click(function(){
             var id = $(this).parent().prev().children("input[name=id]").val();
             $("#parentId").val(id);
         });
-    });
+    });*/
     //二级分类加载
     $("#main .card .items .load").each(function(i){
         $(this).click(function(){
             var cardNo = $(this).parents('.card').attr('num');
             var productTypeId = $(this).children("input[name=id]").val();
-            var card = new Card();
+
             card.loadNextCard(Number(cardNo), productTypeId);
         });
     });
@@ -50,6 +50,7 @@ $(function () {
             type: "POST",
             url: "/product_type/save",
             data: {
+                id: $("#productTypeId").val(),
                 name: $("#name").val(),
                 parentId: $("#parentId").val()
             },
@@ -57,17 +58,23 @@ $(function () {
             async: false,
             success: function (data, textStatus) {
                 data = JSON.parse(data);
-                $("#tip").text(data.msg);
+                $("#msg").text(data.msg);
                 if(data.code==1){
                     $("#name").val("");
                     $("#name").focus();
                     g_add_flag = true;
+                    if($("#productTypeId").val()!=''){
+                        $('#modal_product_type').modal('hide')
+                    }
                 }
             }
         });
     });
     //关闭添加商品分类模态框
     $("#modal_product_type").on("hidden.bs.modal", function(e){
+        $("#productTypeId").val('');
+        $("#name").val('');
+        $("#parentId").val('');
         $("#msg").text('');
         if(g_add_flag==true){
             location.href="/product_type/view";
