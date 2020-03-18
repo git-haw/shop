@@ -2,7 +2,7 @@ package com.haw.shop.model;
 
 import javax.persistence.*;
 
-@Table(name = "Shop")
+@Table(name = "shop")
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
