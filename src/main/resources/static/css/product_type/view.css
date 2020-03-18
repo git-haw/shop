@@ -1,6 +1,17 @@
-#main .items{
+#container #main{
+    display: inline-block;
+    float: left;
+    width: 100%;
+}
+#container #main .card{
+    display: inline-block;
+    float: left;
     width: 15%;
-    height: 200px;
+    border: 1px solid #eee;
+}
+#main .items{
+    width: 100%;
+    height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -18,19 +29,16 @@
 #main .card .items>ul li{
     list-style: none;
 }
-#main .card .items>ul .root-product-type{
+#main .card .items .itemcontainer{
     display: inline-block;
     cursor: pointer;
     width: 100%;
 }
-#main .card .items>ul .root-product-type>.expand,.add{
-    display: inline-block;
-}
-#main .card .items>ul .root-product-type>.expand{
+#main .card .items .itemcontainer>.expand{
     float: left;
     width: 70%;
 }
-#main .card .items>ul .root-product-type>.add{
+#main .card .items .itemcontainer>.add{
     float: right;
     width: 30%;
     padding-left: 20px;
@@ -38,9 +46,37 @@
 #main .card .items>ul .unvisable{
     display: none;
 }
-.tip{
+.msg{
     color: red;
 }
-#main .card .items .root-product-type-item>ul{
+#main .card .items .subcontainer>ul{
     padding-left: 10px;
+}
+#main .card .items .subcontainer .subitemcontainer{
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+}
+#main .card .items .subcontainer .subitemcontainer>.load{
+    float: left;
+    width: 70%;
+}
+#main .card .items .subcontainer .subitemcontainer>.add{
+    float: right;
+    width: 30%;
+    padding-left: 20px;
+}
+#main .card .items .itemcontainer{
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+}
+#main .card .items .itemcontainer>.load{
+    float: left;
+    width: 70%;
+}
+#main .card .items .itemcontainer>.add{
+    float: right;
+    width: 30%;
+    padding-left: 20px;
 }

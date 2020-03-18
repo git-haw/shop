@@ -8,17 +8,18 @@
     <link href="/static/primary/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/static/css/product_type/view.css" rel="stylesheet"/>
     <script src="/static/primary/plugins/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="/static/js/product_type/card.js"></script>
     <script src="/static/js/product_type/view.js"></script>
 </head>
 <body>
 <div id="container">
     <div id="main">
-        <div class="card">
+        <div class="card" num="0">
             <div></div>
             <div class="items">
                 <ul class="">
                     <li th:each="productType0,ptStat0:${result?.list0}">
-                        <div class="root-product-type">
+                        <div class="itemcontainer">
                             <div class="expand">
                                 <input type="hidden" name="id" th:value="${productType0.id}">
                                 <input type="hidden" name="parentId" th:value="${productType0.parentId}">
@@ -30,11 +31,22 @@
                                    data-target="#modal_product_type"></i>
                             </div>
                         </div>
-                        <div class="root-product-type-item">
+                        <div class="subcontainer">
                             <ul class="">
-                                <li th:each="productType1,ptStat1:${result?.list1}" th:if="${productType1.parentId==productType0.id}">
-                                    <span th:text="${productType1.name}">士大夫</span>
-                                    <span><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                <li th:each="productType1,ptStat1:${result?.list1}"
+                                    th:if="${productType1.parentId==productType0.id}">
+                                    <div class="subitemcontainer">
+                                        <div class="load">
+                                            <input type="hidden" name="id" th:value="${productType1.id}">
+                                            <input type="hidden" name="parentId" th:value="${productType1.parentId}">
+                                            <span th:text="${productType1.name}">士大夫</span>
+                                            <i class="glyphicon glyphicon-chevron-right"></i>
+                                        </div>
+                                        <div class="add">
+                                            <i class="glyphicon glyphicon glyphicon-plus" data-toggle="modal"
+                                               data-target="#modal_product_type"></i>
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -47,6 +59,29 @@
                 </button>
             </div>
         </div>
+        <!--/.card-->
+        <!--<div class="card">
+            <div></div>
+            <div class="items">
+                <ul>
+                    <li>
+                        <div class="itemcontainer">
+                            <div class="load">
+                                <input type="hidden" name="id"/>
+                                <input type="hidden" name="parentId"/>
+                                <span>游戏话费</span>
+                                <i class="glyphicon glyphicon-chevron-down"></i>
+                            </div>
+                            <div class="add">
+                                <i class="glyphicon glyphicon glyphicon-plus" data-toggle="modal"
+                                   data-target="#modal_product_type"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+        <!--/.card-->
     </div>
     <!-- 模态框（Modal） -->
     <div class="modal fade" id="modal_product_type" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -61,7 +96,7 @@
                     <label>商品分类名称：</label>
                     <input type="text" name="name" id="name">
                     <input type="hidden" name="parentId" id="parentId" value="-1">
-                    <span id="tip" class="tip"></span>
+                    <span id="tip" class="msg"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

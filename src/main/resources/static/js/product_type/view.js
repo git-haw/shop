@@ -5,8 +5,8 @@
 $(function () {
     //添加商品分类标志
     var g_add_flag=false;
-
-    $("#main .card .items>ul .root-product-type>.expand").click(function () {
+    //展开收起根分类
+    $("#main .card .items>ul .itemcontainer>.expand").click(function () {
         $(this).parent().next().toggleClass("unvisable");
         var i = $(this).children("i").first();
         if(i.hasClass("glyphicon-chevron-down")){
@@ -17,16 +17,31 @@ $(function () {
             i.addClass("glyphicon-chevron-down");
         }
     });
-    $("#main .card .items>ul .root-product-type>.add>i").each(function(i){
+    //根分类添加
+    $("#main .card .items>ul .itemcontainer>.add>i").each(function(i){
         $(this).click(function(){
             var id = $(this).parent().prev().children("input[name=id]").val();
             $("#parentId").val(id);
         });
     });
+    //二级分类添加
+    $("#main .card .items>ul .subcontainer .subitemcontainer>.add>i").each(function(i){
+        $(this).click(function(){
+            var id = $(this).parent().prev().children("input[name=id]").val();
+            $("#parentId").val(id);
+        });
+    });
+    //二级分类加载
+    $("#main .card .items .load").each(function(i){
+        $(this).click(function(){
+            loadNextCard($(this));
+        });
+    });
+    //增加根商品分类
     $("#add_root_product_type").click(function(){
         $("#parentId").val(-1);
     });
-
+    //添加商品分类
     $("#add_product_type").click(function(){
         $.ajax({
             type: "POST",
@@ -48,12 +63,12 @@ $(function () {
             }
         });
     });
-
     //关闭添加商品分类模态框
     $("#modal_product_type").on("hidden.bs.modal", function(e){
-        $("#tip").text('');
+        $("#msg").text('');
         if(g_add_flag==true){
             location.href="/product_type/view";
         }
     });
+
 });

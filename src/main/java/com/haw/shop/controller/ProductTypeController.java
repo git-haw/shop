@@ -61,4 +61,12 @@ public class ProductTypeController {
         }
         return map;
     }
+
+    //    @LoginToken
+    @RequestMapping("/load")
+    @ResponseBody
+    public List load(Integer parentId){
+        List list = productTypeService.selectList(parentId);
+        return list;
+    }
 }
