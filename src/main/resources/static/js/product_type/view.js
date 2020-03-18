@@ -34,7 +34,10 @@ $(function () {
     //二级分类加载
     $("#main .card .items .load").each(function(i){
         $(this).click(function(){
-            loadNextCard($(this));
+            var cardNo = $(this).parents('.card').attr('num');
+            var productTypeId = $(this).children("input[name=id]").val();
+            var card = new Card();
+            card.loadNextCard(Number(cardNo), productTypeId);
         });
     });
     //增加根商品分类
