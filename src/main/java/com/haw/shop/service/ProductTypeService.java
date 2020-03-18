@@ -12,4 +12,6 @@ import java.util.List;
 public interface ProductTypeService {
     int saveOrUpdate(ProductType productType);
     List<ProductType> selectList(Integer parentId);
+    //统计后袋个数
+    Integer countChildren(Integer parentId);
 }

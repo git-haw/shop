@@ -6,8 +6,11 @@ function Card(){
     //加载下一个card
     Card.prototype.loadNextCard = function(cardNo,productTypeId){
         Card.prototype.removeCardAfter(cardNo);
-        var data = Card.prototype.loadCardData(productTypeId);
-        var card = Card.prototype.buildProductTypeList(data,cardNo+1);
+        var list = Card.prototype.loadCardData(productTypeId);
+        if(list.length==0){
+            return;
+        }
+        var card = Card.prototype.buildProductTypeList(list,cardNo+1);
         $("#main").append(card);
         card.on("click",".load",function(){
             var cardNo = $(this).parents('.card').attr('num');
@@ -78,17 +81,32 @@ function Card(){
             var id = $('<input type="hidden" name="id" value="'+item.id+'"/>');
             var parentId = $('<input type="hidden" name="parentId" value="'+item.parentId+'"/>');
             var span = $('<span>'+item.name+'</span>');
-            var i_down = $('<i class="glyphicon glyphicon-chevron-down"></i>');
             load.append(id);
             load.append(parentId);
             load.append(span);
-            load.append(i_down);
             var saveorupdate = $('<div class="saveorupdate"></div>');
             itemcontainer.append(saveorupdate);
             var i_plus = $('<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
             var i_pencil = $('<i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal_product_type"></i>');
             saveorupdate.append(i_plus);
             saveorupdate.append(i_pencil);
+
+            $.ajax({
+                type: "POST",
+                url: "/product_type/countChildren",
+                data: {
+                    parentId: item.id
+                },
+                dataType: "text",
+                async: false,
+                success: function (data, textStatus) {
+                    var count = JSON.parse(data);
+                    if(count!=0){
+                        var i_right = $('<i class="glyphicon glyphicon-chevron-right"></i>');
+                        saveorupdate.append(i_right);
+                    }
+                }
+            });
         }
         return card;
     }

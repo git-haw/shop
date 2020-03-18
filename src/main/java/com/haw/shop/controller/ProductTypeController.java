@@ -35,15 +35,29 @@ public class ProductTypeController {
         Map map = new HashMap<>();
         List<ProductType> list0 = productTypeService.selectList(-1);
         List<ProductType> list1 = new ArrayList<>();
+        List<Integer> list3 = new ArrayList<>();
         for(ProductType item: list0){
             List<ProductType> tmp = productTypeService.selectList(item.getId());
             list1.addAll(tmp);
         }
+        for (ProductType item: list1){
+            Integer count = productTypeService.countChildren(item.getId());
+            list3.add(count);
+        }
         map.put("list0", list0);
         map.put("list1", list1);
+        map.put("list3", list3);
         modelAndView.addObject("result", map);
         modelAndView.setViewName("pages/product_type/view");
         return modelAndView;
+    }
+
+    //    @LoginToken
+    @RequestMapping("/countChildren")
+    @ResponseBody
+    public Integer countChildren(Integer parentId){
+        Integer count = productTypeService.countChildren(parentId);
+        return count;
     }
 
     //    @LoginToken

@@ -42,13 +42,13 @@
                                             <input type="hidden" name="id" th:value="${productType1.id}">
                                             <input type="hidden" name="parentId" th:value="${productType1.parentId}">
                                             <span th:text="${productType1.name}">士大夫</span>
-                                            <i class="glyphicon glyphicon-chevron-right"></i>
                                         </div>
                                         <div class="saveorupdate">
                                             <i class="glyphicon glyphicon-plus" data-toggle="modal"
                                                data-target="#modal_product_type"></i>
                                             <i class="glyphicon glyphicon-pencil" data-toggle="modal"
                                                data-target="#modal_product_type"></i>
+                                            <i th:if="${result?.list3[__${ptStat1.index}__]}!=0" class="glyphicon glyphicon-chevron-right"></i>
                                         </div>
                                     </div>
                                 </li>
@@ -74,13 +74,13 @@
                                 <input type="hidden" name="id"/>
                                 <input type="hidden" name="parentId"/>
                                 <span>游戏话费</span>
-                                <i class="glyphicon glyphicon-chevron-down"></i>
                             </div>
                             <div class="saveorupdate">
                                 <i class="glyphicon glyphicon-plus" data-toggle="modal"
                                                data-target="#modal_product_type"></i>
                                             <i class="glyphicon glyphicon-pencil" data-toggle="modal"
                                                data-target="#modal_product_type"></i>
+                                <i class="glyphicon glyphicon-chevron-right"></i>
                             </div>
                         </div>
                     </li>

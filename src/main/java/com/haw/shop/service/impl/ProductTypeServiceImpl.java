@@ -41,4 +41,12 @@ public class ProductTypeServiceImpl implements ProductTypeService {
         productType.setParentId(parentId);
         return productTypeMapper.select(productType);
     }
+
+    @Override
+    public Integer countChildren(Integer parentId) {
+        ProductType productType = new ProductType();
+        productType.setParentId(parentId);
+        Integer count = productTypeMapper.selectCount(productType);
+        return count;
+    }
 }

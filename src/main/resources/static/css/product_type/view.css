@@ -59,16 +59,16 @@
 }
 #main .card .items .subcontainer .subitemcontainer>.load{
     float: left;
-    width: 70%;
+    width: 60%;
 }
 #main .card .items .subcontainer .subitemcontainer>.saveorupdate{
     float: right;
-    width: 30%;
+    width: 40%;
     padding-left: 10px;
 }
 #main .card .items .itemcontainer>.load{
     float: left;
-    width: 70%;
+    width: 60%;
 }
 #main .card .items .bgcolorgray:hover{
     background-color: #eee !important;
