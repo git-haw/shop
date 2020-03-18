@@ -37,7 +37,7 @@
                             <ul class="">
                                 <li th:each="productType1,ptStat1:${result?.list1}"
                                     th:if="${productType1.parentId==productType0.id}">
-                                    <div class="subitemcontainer">
+                                    <div class="subitemcontainer bgcolorgray">
                                         <div class="load">
                                             <input type="hidden" name="id" th:value="${productType1.id}">
                                             <input type="hidden" name="parentId" th:value="${productType1.parentId}">
@@ -69,7 +69,7 @@
             <div class="items">
                 <ul>
                     <li>
-                        <div class="itemcontainer">
+                        <div class="itemcontainer bgcolorgray">
                             <div class="load">
                                 <input type="hidden" name="id"/>
                                 <input type="hidden" name="parentId"/>

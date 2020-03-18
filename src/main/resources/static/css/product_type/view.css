@@ -70,3 +70,6 @@
     float: left;
     width: 70%;
 }
+#main .card .items .bgcolorgray:hover{
+    background-color: #eee !important;
+}

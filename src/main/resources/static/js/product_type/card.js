@@ -11,6 +11,8 @@ function Card(){
         $("#main").append(card);
         card.on("click",".load",function(){
             var cardNo = $(this).parents('.card').attr('num');
+            $("#main .card[num="+cardNo+"] .items .bgcolorgray").css('background-color','#fff');
+            $(this).parent().css('background-color','#eee');
             var productTypeId = $(this).children("input[name=id]").val();
             Card.prototype.loadNextCard(cardNo,productTypeId);
         });
@@ -69,7 +71,7 @@ function Card(){
             var item = list[i];
             var li = $('<li></li>');
             ul.append(li);
-            var itemcontainer = $('<div class="itemcontainer"></div>');
+            var itemcontainer = $('<div class="itemcontainer bgcolorgray"></div>');
             li.append(itemcontainer);
             var load = $('<div class="load"></div>');
             itemcontainer.append(load);
