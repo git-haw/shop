@@ -16,6 +16,9 @@ public class Shop {
 
     private Byte supply;
 
+    @Column(name = "user_id")
+    private Integer userId;
+
     @Column(name = "brief_introduce")
     private String briefIntroduce;
 
@@ -118,4 +121,16 @@ public class Shop {
     public void setIntroduce(String introduce) {
         this.introduce = introduce;
     }
+
+    /**
+     *
+     * @return userId
+     */
+    public Integer getUserId() {return userId;}
+
+    /**
+     *
+     * @param userId
+     */
+    public void setUserId(Integer userId) {this.userId = userId;}
 }

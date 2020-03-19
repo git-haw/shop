@@ -24,9 +24,6 @@ public class UserInfo {
     @Column(name = "register_date")
     private Date registerDate;
 
-    @Column(name = "shop_id")
-    private Integer shopId;
-
     /**
      * @return id
      */
@@ -139,17 +136,4 @@ public class UserInfo {
         this.registerDate = registerDate;
     }
 
-    /**
-     * @return shop_id
-     */
-    public Integer getShopId() {
-        return shopId;
-    }
-
-    /**
-     * @param shopId
-     */
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
 }

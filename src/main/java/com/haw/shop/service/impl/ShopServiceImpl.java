@@ -23,22 +23,16 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     private ShopMapper shopMapper;
 
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-
     @Override
-    public Shop getShop(Integer id) {
-        return shopMapper.selectByPrimaryKey(id);
+    public Shop getShopByUserId(Integer userId) {
+        Shop shop = new Shop();
+        shop.setUserId(userId);
+        return shopMapper.selectOne(shop);
     }
 
     @Override
-    public void create(Shop shop, Integer userId) {
+    public void create(Shop shop) {
         shopMapper.insertSelective(shop);
-        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);
-        UserInfo vo_userInfo = new UserInfo();
-        vo_userInfo.setId(userId);
-        vo_userInfo.setShopId(shop.getId());
-        userInfoMapper.updateByPrimaryKeySelective(vo_userInfo);
     }
 
     @Override

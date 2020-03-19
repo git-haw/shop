@@ -7,7 +7,7 @@ import com.haw.shop.model.Shop;
  * Created by haw on 17-8-30.
  */
 public interface ShopService {
-    Shop getShop(Integer id);
-    void create(Shop shop, Integer userId);
+    Shop getShopByUserId(Integer userId);
+    void create(Shop shop);
     void setting(Shop shop);
 }

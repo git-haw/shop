@@ -35,13 +35,10 @@ public class ShopController {
     @RequestMapping("/view")
     public ModelAndView view(HttpServletRequest request, ModelAndView modelAndView) {
         HttpSession session = request.getSession();
-        Integer userrid = (Integer) session.getAttribute("userid");
-        UserInfo userInfo = userService.getUser(userrid);
-        Integer shopId = userInfo.getShopId();
+        Integer userId = (Integer) session.getAttribute("userid");
+        Shop shop = shopService.getShopByUserId(userId);
         Map map = new HashMap<>();
-        Shop shop = new Shop();
-        if (shopId != null) {
-            shop = shopService.getShop(shopId);
+        if (shop != null) {
             map.put("action", "/shop/setting");
         } else {
             map.put("action", "/shop/create");
@@ -56,7 +53,8 @@ public class ShopController {
     public String create(HttpServletRequest request, Shop shop) throws IOException {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userid");
-        shopService.create(shop, userId);
+        shop.setUserId(userId);
+        shopService.create(shop);
         return "/shop/view";
     }
 
