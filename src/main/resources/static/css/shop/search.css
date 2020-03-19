@@ -1,0 +1,28 @@
+.searchcontainer{
+    padding-bottom: 10px;
+}
+.searchpanel{
+    background-color: #ff4e2d;
+    height: 34px;
+    padding: 1px;
+}
+.searchpanel>button{
+    background-color: #ff4e2d;
+    color: #ffffff;
+    width: 80px;
+    font-size:17px;
+}
+.searchpanel>input{
+    width: 200px;
+    height: 30px;
+    margin: 1px;
+}
+.line{
+    padding-top: 10px;
+}
+.line>div{
+    display: inline-block;
+}
+.right{
+    float: right;
+}

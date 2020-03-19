@@ -5,6 +5,9 @@ import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.ShopService;
 import com.haw.shop.service.UserService;
 import com.haw.shop.token.LoginToken;
+import com.haw.shop.token.PassToken;
+import com.haw.shop.vo.UserInfoVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,6 +77,26 @@ public class ShopController {
             file.transferTo(new File("E:/upload/shop/" + fileName));
         }
         return "";
+    }
+
+    @PassToken
+    @RequestMapping("/view_shop")
+    public ModelAndView view_shop(HttpServletRequest request, ModelAndView modelAndView) {
+        HttpSession session = request.getSession();
+        Integer userrid = (Integer)session.getAttribute("userid");
+        Map result = new HashMap<>();
+        if(userrid!=null){
+            UserInfo userInfo = userService.getUser(userrid);
+            UserInfoVo userInfoVo = new UserInfoVo();
+            BeanUtils.copyProperties(userInfo, userInfoVo);
+            result.put("flag", 1);
+            result.put("userInfo",userInfoVo);
+        }else{
+            result.put("flag",0);
+        }
+        modelAndView.addObject("result",result);
+        modelAndView.setViewName("pages/shop/view_shop");
+        return modelAndView;
     }
 
 
