@@ -37,11 +37,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 如果不是映射到方法直接通过
-        if(!(handler instanceof HandlerMethod)){
+        if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-        HandlerMethod handlerMethod=(HandlerMethod)handler;
-        Method method=handlerMethod.getMethod();
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        Method method = handlerMethod.getMethod();
         //检查是否有passtoken注释，有则跳过认证
         if (method.isAnnotationPresent(PassToken.class)) {
             PassToken passToken = method.getAnnotation(PassToken.class);
@@ -54,10 +54,19 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             LoginToken loginToken = method.getAnnotation(LoginToken.class);
             if (loginToken.required()) {
                 // 从cookie中取出token
-                Cookie cookie = Utils.getCookieByName(request,"token");
+                Cookie cookie = Utils.getCookieByName(request, "token");
+
+                String url = request.getRequestURL().toString();
+                String param = request.getQueryString();
+                String redirectURL = "";
+                if (param != null) {
+                    redirectURL = url + "?" + param;
+                } else {
+                    redirectURL = url;
+                }
                 // 执行认证
                 if (cookie == null) {
-                    response.sendRedirect("/login");
+                    response.sendRedirect("/login?redirectURL=" + redirectURL);
                     throw new RuntimeException("无登录令牌，请重新登录");
                 }
                 String token = cookie.getValue();
@@ -66,13 +75,13 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 try {
                     userId = JWT.decode(token).getAudience().get(0);
                 } catch (JWTDecodeException j) {
-                    response.sendRedirect("/login");
+                    response.sendRedirect("/login?redirectURL=" + redirectURL);
                     throw new RuntimeException("解码登录令牌异常");
                 }
                 Integer id = Integer.valueOf(userId);
                 UserInfo userInfo = userService.getUser(id);
                 if (userInfo == null) {
-                    response.sendRedirect("/login");
+                    response.sendRedirect("/login?redirectURL=" + redirectURL);
                     throw new RuntimeException("非法登录令牌：无该用户");
                 }
                 // 验证 token 的签名
@@ -80,7 +89,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 try {
                     jwtVerifier.verify(token);
                 } catch (JWTVerificationException e) {
-                    response.sendRedirect("/login");
+                    response.sendRedirect("/login?redirectURL=" + redirectURL);
                     throw new RuntimeException("非法登录令牌：密匙错误");
                 }
                 return true;

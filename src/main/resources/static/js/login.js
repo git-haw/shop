@@ -59,6 +59,24 @@ function checkPassword() {
     }
 
 }
+//从地址栏获取登录成功后跳转地址
+function getRedirectUrl(){
+    var url = location.href;
+    var sub = url.indexOf('?');
+    if(sub==-1){
+        return "/index";
+    }
+    var p = url.substring(sub+1);
+    if(p.length===0){
+        return "/index";
+    }
+    var sub1 = p.indexOf('=');
+    var rst = p.substring(sub1+1);
+    if(rst.length==0){
+        return "/index";
+    }
+    return rst;
+}
 
 
 $(function () {
@@ -100,7 +118,8 @@ $(function () {
                 success: function (data, textStatus) {
                     data = JSON.parse(data);
                     if (data.flag == 1) {
-                        location.href = "/index";
+                        var url = getRedirectUrl();
+                        location.href = url;
                     } else {
                         login_error = login_error+1;
                         $("#msg").text("用户名或者密码错误");
