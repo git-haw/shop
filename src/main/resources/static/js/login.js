@@ -63,47 +63,31 @@ function checkPassword() {
 
 $(function () {
     $(window).load(function () {
-
-        var checkResult = false;
-        var checkPasswordResult = false;
-        var checkCodeResult = false;
-        var checkNameResult = false;
         var login_error = 0;
-
-
         $("#checkCode").click(function () {
             createCode();
         });
-
         $("#name").blur(function () {
-            checkNameResult = checkName();
+            checkName();
         });
         $("#pwd").blur(function () {
-            checkPasswordResult = checkPassword();
+            checkPassword();
         });
         $("#input_code").blur(function () {
-            checkCodeResult = checkCode();
+            checkCode();
         });
         $("#login").click(function () {
-            checkNameResult = checkName();
-            if (checkNameResult == false) {
+            if (checkName() == false) {
                 return false;
             }
-            checkPasswordResult = checkPassword();
-            if (checkPasswordResult == false) {
+            if (checkPassword() == false) {
                 return false;
             }
             if (login_error > 5) {
-                checkCodeResult = checkCode();
-                if (checkCodeResult == false) {
+                if (checkCode() == false) {
                     return false;
                 }
             }
-
-            //alert(checkNameResult);
-            //alert(checkPasswordResult);
-            //alert(checkCodeResult);
-            //alert(checkResult);
             $.ajax({
                 type: "POST",
                 url: "/user/login",
@@ -116,8 +100,6 @@ $(function () {
                 success: function (data, textStatus) {
                     data = JSON.parse(data);
                     if (data.flag == 1) {
-                        $.cookie('userid', data.userid, {expires: 1, path: '/'});
-                        $.cookie('token', data.token, {expires: 1, path: '/'});
                         location.href = "/index";
                     } else {
                         login_error = login_error+1;

@@ -46,6 +46,20 @@ public class Utils {
     }
 
     /**
+     *
+     * 移除cookie
+     *
+     * @param response
+     * @param name      cookie名字
+     */
+    public static void removeCookie(HttpServletResponse response, String name) {
+        Cookie cookie = new Cookie(name, null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
+
+    /**
      * 根据名字获取cookie
      *
      * @param request

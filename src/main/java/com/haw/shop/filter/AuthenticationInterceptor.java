@@ -7,13 +7,15 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
-import com.haw.shop.token.PassToken;
 import com.haw.shop.token.LoginToken;
+import com.haw.shop.token.PassToken;
+import com.haw.shop.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
@@ -34,8 +36,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
      5.认证通过则可以访问，不通过会报相关错误信息
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 从 http 请求头中取出 token
-        String token = request.getHeader("token");
         // 如果不是映射到方法直接通过
         if(!(handler instanceof HandlerMethod)){
             return true;
@@ -51,30 +51,37 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         }
         //检查有没有需要用户权限的注解
         if (method.isAnnotationPresent(LoginToken.class)) {
-            LoginToken userLoginToken = method.getAnnotation(LoginToken.class);
-            if (userLoginToken.required()) {
+            LoginToken loginToken = method.getAnnotation(LoginToken.class);
+            if (loginToken.required()) {
+                // 从cookie中取出token
+                Cookie cookie = Utils.getCookieByName(request,"token");
                 // 执行认证
-                if (token == null) {
-                    throw new RuntimeException("无token，请重新登录");
+                if (cookie == null) {
+                    response.sendRedirect("/login");
+                    throw new RuntimeException("无登录令牌，请重新登录");
                 }
+                String token = cookie.getValue();
                 // 获取 token 中的 user id
                 String userId = null;
                 try {
                     userId = JWT.decode(token).getAudience().get(0);
                 } catch (JWTDecodeException j) {
-                    throw new RuntimeException("401");
+                    response.sendRedirect("/login");
+                    throw new RuntimeException("解码登录令牌异常");
                 }
                 Integer id = Integer.valueOf(userId);
                 UserInfo userInfo = userService.getUser(id);
                 if (userInfo == null) {
-                    throw new RuntimeException("用户不存在，请重新登录");
+                    response.sendRedirect("/login");
+                    throw new RuntimeException("非法登录令牌：无该用户");
                 }
-                // 验证 token
+                // 验证 token 的签名
                 JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256("screct")).build();
                 try {
                     jwtVerifier.verify(token);
                 } catch (JWTVerificationException e) {
-                    throw new RuntimeException("401");
+                    response.sendRedirect("/login");
+                    throw new RuntimeException("非法登录令牌：密匙错误");
                 }
                 return true;
             }
