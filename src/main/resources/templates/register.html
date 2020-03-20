@@ -4,32 +4,27 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>新用户注册界面</title>
+    <link href="/static/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/common/common.css" rel="stylesheet"/>
     <link type="text/css" rel="stylesheet" href="/static/css/register/style.css" media="all"/>
-    <link type="text/css" rel="stylesheet" href="/static/css/register/demo.css"/>
-    <script type="text/javascript" src="/static/js/jquery.min.js">
-    </script>
-    <script type="text/javascript" src="/static/js/Validform_v5.3.2_min.js">
-    </script>
+    <link href="/static/css/register/register.css" rel="stylesheet" />
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script src="/static/plugins/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript">
         $(function () {
-            //$(".registerform").Validform();  //就这一行代码！;
-
-            $(".registerform").Validform({
+            $("#registerform").Validform({
                 tiptype: 2
             });
         });
     </script>
 </head>
 <body>
-<div class="main" style="height:600px;">
+<header th:include="pages/register/nav::nav"></header>
+<div class="main">
     <div class="wraper">
-        <p class="tr">
-            <a href="/index" class="blue ml10 fz12">返回商城首页&raquo;</a>
-        </p>
-
         <h2 class="green">新用户注册</h2>
-
-        <form class="registerform" method="post" action="/user/register">
+        <form id="registerform" class="registerform" method="post" action="/user/register">
             <table width="100%" style="table-layout:fixed;">
                 <tr>
                     <td class="need" style="width:10px;">
@@ -57,8 +52,7 @@
                         <input type="text" value="" name="email" class="inputxt" datatype="e" errormsg="邮箱格式不对！"/>
                     </td>
                     <td>
-                        <div class="Validform_checktip">
-                        </div>
+                        <span class="Validform_checktip"></span>
                     </td>
                 </tr>
                 <tr>
@@ -73,8 +67,7 @@
                                errormsg="密码长度在6-18位！"/>
                     </td>
                     <td>
-                        <div class="Validform_checktip">
-                        </div>
+                        <span class="Validform_checktip"></span>
                     </td>
                 </tr>
                 <tr>
@@ -88,8 +81,7 @@
                         <input type="text" value="" name="phone" class="inputxt" datatype="m" errormsg="请输入您的手机号码！"/>
                     </td>
                     <td>
-                        <div class="Validform_checktip">
-                        </div>
+                        <span class="Validform_checktip"></span>
                     </td>
                 </tr>
                 <tr>
@@ -99,11 +91,11 @@
                         用户类型：
                     </td>
                     <td>
-                        <input type="radio" value="1" name="type" checked/>会员<input type="radio" value="0" name="type"/>管理员
+                        <input type="radio" value="1" name="type" checked/>会员
+                        <input type="radio" value="0" name="type"/>管理员
                     </td>
                     <td>
-                        <div class="Validform_checktip">
-                        </div>
+                        <span class="Validform_checktip"></span>
                     </td>
                 </tr>
                 <tr>
@@ -112,12 +104,14 @@
                     <td>
                     </td>
                     <td colspan="2" style="padding:10px 0 18px 0;">
-                        <input type="submit" value="提 交"/><input type="reset" value="重 置"/>
+                        <input type="submit" value="提 交" id="submit"/>
+                        <input type="reset" value="重 置" id="reset"/>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
 </div>
+<footer th:include="pages/common/footer::footer"></footer>
 </body>
 </html>

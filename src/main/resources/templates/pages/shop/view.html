@@ -9,60 +9,60 @@
     <script type="text/javascript" src="/static/js/shop/view.js"></script>
 </head>
 <body>
-<form th:action="${result?.action}" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" th:value="${result?.shop?.id}">
-    <input type="hidden" name="userId" th:value="${result?.shop?.userId}">
+<form th:action="${action}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${shop?.id}">
+    <input type="hidden" name="userId" th:value="${shop?.userId}">
     <table>
         <tr>
             <td>店铺名称：</td>
-            <td><input type="text" name="name" th:value="${result?.shop?.name}"></td>
+            <td><input type="text" name="name" th:value="${shop?.name}"></td>
         </tr>
         <tr>
             <td>店铺标志：</td>
             <td>
-                <div><img th:src="'http://localhost:8085/'+${result?.shop?.logo}" id="logo_img" width="80" height="80"></div>
+                <div><img th:src="'http://localhost:8085/'+${shop?.logo}" id="logo_img" width="80" height="80"></div>
                 <input type="file" name="file" id="file">
-                <input type="hidden" name="logo" id="logo" th:value="${result?.shop?.logo}">
+                <input type="hidden" name="logo" id="logo" th:value="${shop?.logo}">
             </td>
         </tr>
         <tr>
             <td>店铺简介：</td>
-            <td><textarea name="briefIntroduce" th:text="${result?.shop?.briefIntroduce}"></textarea></td>
+            <td><textarea name="briefIntroduce" th:text="${shop?.briefIntroduce}"></textarea></td>
         </tr>
         <tr>
             <td>经营地址：</td>
-            <td><textarea name="address" th:text="${result?.shop?.address}"></textarea></td>
+            <td><textarea name="address" th:text="${shop?.address}"></textarea></td>
         </tr>
         <tr>
             <td>主要货源：</td>
             <td>
                 <p>
                     <input type="radio" name="supply" id="off-line" value="1"
-                           th:attr="checked=${result?.shop?.supply==1?true:false}"><label for="off-line">线下批发市场</label>
+                           th:attr="checked=${shop?.supply==1?true:false}"><label for="off-line">线下批发市场</label>
                     <input type="radio" name="supply" id="store" value="5"
-                           th:attr="checked=${result?.shop?.supply==5?true:false}"><label for="store">实体店拿货</label>
+                           th:attr="checked=${shop?.supply==5?true:false}"><label for="store">实体店拿货</label>
                     <input type="radio" name="supply" id="alibaba" value="3"
-                           th:attr="checked=${result?.shop?.supply==3?true:false}"><label for="alibaba">阿里巴巴批发</label>
+                           th:attr="checked=${shop?.supply==3?true:false}"><label for="alibaba">阿里巴巴批发</label>
                     <input type="radio" name="supply" id="distribution" value="4"
-                           th:attr="checked=${result?.shop?.supply==4?true:false}"><label
+                           th:attr="checked=${shop?.supply==4?true:false}"><label
                         for="distribution">分销/代销</label>
                 </p>
 
                 <p>
                     <input type="radio" name="supply" id="made-myself" value="2"
-                           th:attr="checked=${result?.shop?.supply==2?true:false}"><label for="made-myself">自己生产</label>
+                           th:attr="checked=${shop?.supply==2?true:false}"><label for="made-myself">自己生产</label>
                     <input type="radio" name="supply" id="oem" value="7"
-                           th:attr="checked=${result?.shop?.supply==7?true:false}"><label for="oem">代工生产</label>
+                           th:attr="checked=${shop?.supply==7?true:false}"><label for="oem">代工生产</label>
                     <input type="radio" name="supply" id="free-way" value="8"
-                           th:attr="checked=${result?.shop?.supply==8?true:false}"><label for="free-way">自由公司渠道</label>
+                           th:attr="checked=${shop?.supply==8?true:false}"><label for="free-way">自由公司渠道</label>
                     <input type="radio" name="supply" id="not-sure" value="6"
-                           th:attr="checked=${result?.shop?.supply==6?true:false}"><label for="not-sure">货源还未确定</label>
+                           th:attr="checked=${shop?.supply==6?true:false}"><label for="not-sure">货源还未确定</label>
                 </p>
             </td>
         </tr>
         <tr>
             <td>店铺介绍：</td>
-            <td><textarea name="introduce" th:text="${result?.shop?.introduce}"></textarea></td>
+            <td><textarea name="introduce" th:text="${shop?.introduce}"></textarea></td>
         </tr>
         <tr>
             <td></td>

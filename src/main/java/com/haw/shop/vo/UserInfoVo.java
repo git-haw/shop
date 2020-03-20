@@ -6,6 +6,7 @@ package com.haw.shop.vo;
 public class UserInfoVo {
     private Integer id;
     private String name;
+    private Boolean isLogin;
 
     public Integer getId() {
         return id;
@@ -23,11 +24,20 @@ public class UserInfoVo {
         this.name = name;
     }
 
+    public Boolean getIsLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(Boolean isLogin) {
+        this.isLogin = isLogin;
+    }
+
     @Override
     public String toString() {
         return "UserInfoVo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", isLogin=" + isLogin +
                 '}';
     }
 }

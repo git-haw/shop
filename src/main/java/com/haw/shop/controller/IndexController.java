@@ -2,6 +2,8 @@ package com.haw.shop.controller;
 
 import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
+import com.haw.shop.token.PassToken;
+import com.haw.shop.util.Utils;
 import com.haw.shop.vo.UserInfoVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +24,23 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
+    @PassToken
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request,ModelAndView modelAndView){
         HttpSession session = request.getSession();
-        Integer userrid = (Integer)session.getAttribute("userid");
-        Map result = new HashMap<>();
-        if(userrid!=null){
-            UserInfo userInfo = userService.getUser(userrid);
-            UserInfoVo userInfoVo = new UserInfoVo();
-            BeanUtils.copyProperties(userInfo,userInfoVo);
-            result.put("flag", 1);
-            result.put("userInfo",userInfoVo);
-        }else{
-            result.put("flag",0);
-        }
-        modelAndView.addObject("result",result);
+        Integer userId = (Integer)session.getAttribute("userid");
+        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
+        modelAndView.addObject("userInfo",userInfoVo);
+        return modelAndView;
+    }
+
+    @PassToken
+    @GetMapping("/register")
+    public ModelAndView register(HttpServletRequest request,ModelAndView modelAndView){
+        HttpSession session = request.getSession();
+        Integer userId = (Integer)session.getAttribute("userid");
+        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
+        modelAndView.addObject("userInfo",userInfoVo);
         return modelAndView;
     }
 }

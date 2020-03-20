@@ -4,55 +4,62 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>用户登录</title>
-    <link type="text/css" rel="stylesheet" href="/static/css/login/login.css"/>
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="/static/js/login.js"></script>
+    <link href="/static/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/common/common.css" rel="stylesheet"/>
+    <link href="/static/css/login/login.css" rel="stylesheet"/>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/plugins/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/login.js"></script>
 </head>
 <body>
 <div id="main">
-    <div id="form_1">
-    </div>
-    <div id="form_2">
-        <form id="loginForm" action="/user/login">
-            <label>
-                登录账号/邮箱
-            </label>
-            <br/>
-            <input type="text" id="name" name="name"
-                   style="height: 30px; width: 250px; border: 2px solid #E3393C; border-radius: 7px;"
-                   placeholder="请输入正确的邮箱" required/><span id="checkName"
-                                                          style="float: right; color: #FF0000; font-size: 12px;"></span>
-            <br/>
-            <br/>
-            <label>
-                密码
-            </label>
-            <br/>
-            <input type="password" id="pwd" name="password"
-                   style="height: 30px; width: 250px; border: 2px solid #E3393C; border-radius: 7px;"
-                   placeholder="密码长度在6~20位" required/><span id="checkpw"
-                                                            style="float: right; color: #FF0000; font-size: 12px;"></span>
-            <br/>
-            <br/>
-            <label>
-                验证码：
-            </label>
-            <input type="text" size="5" id="input_code"
-                   style="height: 30px; width: 100px; border: 2px solid #E3393C; border-radius: 7px;"
-                   placeholder="请输入验证码" required/><span id="checkCode"
-                                                        style="background-color: #006699; font-size: 25px; font-style: italic; color: #FFFFFF;"></span>
-            <span id="Code" style="float: right; color: #FF0000; font-size: 12px;"></span>
-            <br/>
-            <br/>
-            <input type="button" id="login" value="登录"
-                   style="height: 40px; color: #FFFFFF; width: 250px; background-color: #FF0000; border-radius: 7px;"/>
-        </form>
-        <br/>
-        <br/>
-        <span><a href="/register">申请注册</a></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><a
-            href="#">忘记密码？</a></span>
+    <div id="header"></div>
+    <div id="content">
+        <div class="login-newbg"></div>
+        <div class="login-adlink">
+            <a href="#"></a>
+        </div>
+        <div class="content-layout">
+            <div class="login-box-warp">
+                <div class="login-box">
+                    <div class="static-form">
+                        <form>
+                            <div>
+                                <span id="msg"></span>
+                            </div>
+                            <div class="field">
+                                <label for="name">
+                                    <i class="glyphicon glyphicon-user iconfont"></i>
+                                </label>
+                                <input type="text" id="name" name="name" class="login-text" placeholder="会员名/邮箱/手机号"/>
+                            </div>
+                            <div class="field">
+                                <label for="pwd">
+                                    <i class="glyphicon glyphicon-lock iconfont"></i>
+                                </label>
+                                <input type="password" id="pwd" name="password" class="login-text"/>
+                            </div>
+                            <div id="checkCodeDiv" style="display: none">
+                                <label for="input_code">验证码：</label>
+                                <input type="text" size="5" id="input_code"/>
+                                <span id="checkCode"></span>
+                            </div>
+                            <div class="logindiv">
+                                <button id="login">登录</button>
+                            </div>
+                            <div class="help-div">
+                                <a href="/register">免费注册</a>
+                                <a href="#">忘记密码？</a>
+                            </div>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<footer th:include="pages/common/footer::footer"></footer>
 </body>
 </html>

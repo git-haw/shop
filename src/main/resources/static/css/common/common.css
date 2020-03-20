@@ -9,3 +9,6 @@ body{
     min-width: 1024px;
     color: #333;
 }
+a{
+    text-decoration: none !important;
+}

@@ -1,0 +1,108 @@
+.main {
+    background-color: #fff;
+    color: #424242;
+    padding-top: 100px;
+    line-height: 22px;
+    height: 650px;
+}
+input {
+    vertical-align: middle;
+}
+#submit{
+    width: 50px;
+    height: 40px;
+}
+#reset{
+    width: 50px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.main h1, .main h2, .main h3 {
+    padding-left: 10px;
+}
+
+.main h1 {
+    text-align: center;
+    color: #212222;
+    font-family: "microsoft yahei";
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 2em;
+    margin-bottom: 36px;
+}
+
+.main h2 {
+    background-color: #eee;
+    line-height: 2 !important;
+}
+
+.main h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.registerform {
+    margin-bottom: 40px;
+}
+
+.registerform .need {
+    width: 10px;
+    color: #b20202;
+}
+
+.registerform td {
+    padding: 5px 0;
+    vertical-align: top;
+    text-align: left;
+}
+
+.registerform .inputxt, .registerform textarea {
+    border: 1px solid #a5aeb6;
+    width: 196px;
+    padding: 4px 2px;
+}
+
+.registerform textarea {
+    height: 75px;
+}
+
+.registerform label {
+    margin: 0 15px 0 4px;
+}
+
+.registerform .tip {
+    line-height: 20px;
+    color: #5f6a72;
+}
+
+.registerform select {
+    width: 202px;
+}
+
+.registerformalter select {
+    width: 124px;
+}
+/* IE7 */
+.wraper {
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main h3, .main h2 {
+    color: #212222;
+    font-size: 26px;
+    font-weight: normal;
+    line-height: 1.2em;
+    margin-bottom: 22px;
+    font-family: "microsoft yahei";
+}
+
+.main h3 span, .main h2 span {
+    color: #888;
+}
+
+.main p {
+    margin-bottom: 18px;
+}

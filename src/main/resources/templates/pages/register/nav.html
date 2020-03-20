@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="nav">
+    <link href="/static/css/common/nav.css" rel="stylesheet"/>
+    <nav class="header-nav">
+        <div class="top_middle">
+            <span th:if="${userInfo?.isLogin}==false">
+                <span>喵，欢迎来天猫</span>
+                <a href="/login">请登录</a>
+                <a href="/register">免费注册</a>
+            </span>
+            <span th:if="${userInfo?.isLogin}==true">
+                <span>hi,<span th:text="${userInfo?.name}"></span></span>
+                <a href="/user/logout">退出登录</a>
+            </span>
+            <span class="pull-right">
+                <a href="/my_taobao">我的淘宝</a>
+                <a href="">
+                    <span style="color: #c40000;margin: 0px;" class="glyphicon glyphicon-shopping-cart"></span>
+                    购物车<strong>0</strong>件
+                </a>
+            </span>
+        </div>
+    </nav>
+</div>
+
