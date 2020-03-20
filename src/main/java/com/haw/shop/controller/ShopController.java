@@ -6,10 +6,13 @@ import com.haw.shop.service.ShopService;
 import com.haw.shop.service.UserService;
 import com.haw.shop.token.LoginToken;
 import com.haw.shop.token.PassToken;
+import com.haw.shop.util.Utils;
 import com.haw.shop.vo.UserInfoVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,6 +30,7 @@ import java.util.Map;
 /**
  * Created by aiwei on 2020-3-14.
  */
+@Validated
 @Controller
 @RequestMapping("/shop")
 public class ShopController {
@@ -39,15 +44,14 @@ public class ShopController {
     public ModelAndView view(HttpServletRequest request, ModelAndView modelAndView) {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userid");
-        Shop shop = shopService.getShopByUserId(userId);
         Map map = new HashMap<>();
-        if (shop != null) {
-            map.put("action", "/shop/setting");
+        if (userId != null) {
+            Shop shop = shopService.getShopByUserId(userId);
+            modelAndView.addObject("action", "/shop/setting");
+            modelAndView.addObject("shop", shop);
         } else {
-            map.put("action", "/shop/create");
+            modelAndView.addObject("action", "/shop/create");
         }
-        map.put("shop", shop);
-        modelAndView.addObject("result", map);
         modelAndView.setViewName("pages/shop/view");
         return modelAndView;
     }
@@ -80,21 +84,15 @@ public class ShopController {
     }
 
     @PassToken
-    @RequestMapping("/view_shop")
-    public ModelAndView view_shop(HttpServletRequest request, ModelAndView modelAndView) {
+    @GetMapping("/view_shop")
+    public ModelAndView view_shop(HttpServletRequest request, ModelAndView modelAndView,@NotNull(message = "用户id不能为空") Integer userNumberId) {
         HttpSession session = request.getSession();
-        Integer userrid = (Integer)session.getAttribute("userid");
-        Map result = new HashMap<>();
-        if(userrid!=null){
-            UserInfo userInfo = userService.getUser(userrid);
-            UserInfoVo userInfoVo = new UserInfoVo();
-            BeanUtils.copyProperties(userInfo, userInfoVo);
-            result.put("flag", 1);
-            result.put("userInfo",userInfoVo);
-        }else{
-            result.put("flag",0);
-        }
-        modelAndView.addObject("result",result);
+        Integer userId = (Integer) session.getAttribute("userid");
+        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
+
+        Shop shop = shopService.getShopByUserId(userNumberId);
+        modelAndView.addObject("userInfo", userInfoVo);
+        modelAndView.addObject("shop", shop);
         modelAndView.setViewName("pages/shop/view_shop");
         return modelAndView;
     }

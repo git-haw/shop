@@ -6,6 +6,7 @@ import com.haw.shop.token.TokenUtil;
 import com.haw.shop.token.LoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,24 +15,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by haw on 17-8-30.
  */
+@Validated
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @RequestMapping("/{id}")
-    @ResponseBody
-    public UserInfo test(@PathVariable("id") Integer id) {
-        return userService.getUser(id);
-    }
 
     @RequestMapping("/register")
     public String register(UserInfo user) {
@@ -41,7 +38,7 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Map login(String name, String password, HttpServletRequest request) {
+    public Map login(@NotNull(message = "登录名不能为空") String name, @NotNull(message = "登录密码不能为空") String password, HttpServletRequest request) {
         UserInfo userInfo = userService.findUserByLogin(name, password);
         Map result = new HashMap<>();
         if (userInfo != null) {
@@ -59,17 +56,10 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public ModelAndView logout(HttpServletRequest request){
+    public ModelAndView logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.invalidate();
         return new ModelAndView("/login");
-    }
-
-    @LoginToken
-    @GetMapping("/getMessage")
-    @ResponseBody
-    public String getMessage() {
-        return "你已通过验证";
     }
 
 }

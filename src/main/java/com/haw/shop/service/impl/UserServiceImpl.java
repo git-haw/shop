@@ -7,6 +7,7 @@ import com.haw.shop.token.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.Date;
 
@@ -37,6 +38,8 @@ public class UserServiceImpl implements UserService {
      * 根据用户名、手机号码、邮箱和密码查询用户
      */
     public UserInfo findUserByLogin(String name, String password) {
+        Assert.notNull(name, "登录名不能为空");
+        Assert.notNull(password, "登录密码不能为空");
         UserInfo userInfo1 = new UserInfo();
         userInfo1.setName(name);
         userInfo1.setPassword(password);

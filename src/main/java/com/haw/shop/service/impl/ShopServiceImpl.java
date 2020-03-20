@@ -10,7 +10,9 @@ import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -25,6 +27,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Shop getShopByUserId(Integer userId) {
+        Assert.notNull(userId, "用户id不能为空");
         Shop shop = new Shop();
         shop.setUserId(userId);
         return shopMapper.selectOne(shop);

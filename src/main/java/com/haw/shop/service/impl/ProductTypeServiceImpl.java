@@ -11,6 +11,7 @@ import com.haw.shop.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 
     @Override
     public List<ProductType> selectList(Integer parentId) {
+        Assert.notNull(parentId,"父商品分类id不能为空");
         ProductType productType = new ProductType();
         productType.setParentId(parentId);
         return productTypeMapper.select(productType);
@@ -44,6 +46,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 
     @Override
     public Integer countChildren(Integer parentId) {
+        Assert.notNull(parentId,"父商品分类id不能为空");
         ProductType productType = new ProductType();
         productType.setParentId(parentId);
         Integer count = productTypeMapper.selectCount(productType);

@@ -8,6 +8,7 @@ import com.haw.shop.vo.UserInfoVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.Map;
 /**
  * Created by aiwei on 2020-3-14.
  */
+@Validated
 @Controller
 @RequestMapping("/product_type")
 public class ProductTypeController {
@@ -55,7 +58,7 @@ public class ProductTypeController {
     //    @LoginToken
     @RequestMapping("/countChildren")
     @ResponseBody
-    public Integer countChildren(Integer parentId){
+    public Integer countChildren(@NotNull(message = "父商品分类id不能为空")Integer parentId){
         Integer count = productTypeService.countChildren(parentId);
         return count;
     }
@@ -79,7 +82,7 @@ public class ProductTypeController {
     //    @LoginToken
     @RequestMapping("/load")
     @ResponseBody
-    public List load(Integer parentId){
+    public List load(@NotNull(message = "父商品分类id不能为空")Integer parentId){
         List list = productTypeService.selectList(parentId);
         return list;
     }
