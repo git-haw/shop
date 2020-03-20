@@ -1,21 +1,14 @@
 package com.haw.shop.controller;
 
 import com.haw.shop.model.ProductType;
-import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.ProductTypeService;
-import com.haw.shop.service.UserService;
-import com.haw.shop.vo.UserInfoVo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +28,6 @@ public class ProductTypeController {
     //    @LoginToken
     @RequestMapping("/view")
     public ModelAndView view(ModelAndView modelAndView) {
-        Map map = new HashMap<>();
         List<ProductType> list0 = productTypeService.selectList(-1);
         List<ProductType> list1 = new ArrayList<>();
         List<Integer> list3 = new ArrayList<>();
@@ -47,10 +39,9 @@ public class ProductTypeController {
             Integer count = productTypeService.countChildren(item.getId());
             list3.add(count);
         }
-        map.put("list0", list0);
-        map.put("list1", list1);
-        map.put("list3", list3);
-        modelAndView.addObject("result", map);
+        modelAndView.addObject("list0", list0);
+        modelAndView.addObject("list1", list1);
+        modelAndView.addObject("list3", list3);
         modelAndView.setViewName("pages/product_type/view");
         return modelAndView;
     }

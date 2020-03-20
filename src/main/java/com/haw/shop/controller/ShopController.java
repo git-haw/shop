@@ -1,14 +1,11 @@
 package com.haw.shop.controller;
 
 import com.haw.shop.model.Shop;
-import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.ShopService;
 import com.haw.shop.service.UserService;
-import com.haw.shop.token.LoginToken;
 import com.haw.shop.token.PassToken;
 import com.haw.shop.util.Utils;
 import com.haw.shop.vo.UserInfoVo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;

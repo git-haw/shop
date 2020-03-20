@@ -18,7 +18,7 @@
             <div></div>
             <div class="items">
                 <ul class="">
-                    <li th:each="productType0,ptStat0:${result?.list0}">
+                    <li th:each="productType0,ptStat0:${list0}">
                         <div class="itemcontainer">
                             <div class="expand">
                                 <input type="hidden" name="id" th:value="${productType0.id}">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="subcontainer">
                             <ul class="">
-                                <li th:each="productType1,ptStat1:${result?.list1}"
+                                <li th:each="productType1,ptStat1:${list1}"
                                     th:if="${productType1.parentId==productType0.id}">
                                     <div class="subitemcontainer bgcolorgray">
                                         <div class="load">
@@ -48,7 +48,8 @@
                                                data-target="#modal_product_type"></i>
                                             <i class="glyphicon glyphicon-pencil" data-toggle="modal"
                                                data-target="#modal_product_type"></i>
-                                            <i th:if="${result?.list3[__${ptStat1.index}__]}!=0" class="glyphicon glyphicon-chevron-right"></i>
+                                            <i th:if="${list3[__${ptStat1.index}__]}!=0"
+                                               class="glyphicon glyphicon-chevron-right"></i>
                                         </div>
                                     </div>
                                 </li>
@@ -114,5 +115,6 @@
         </div>
         <!-- /.modal -->
     </div>
+</div>
 </body>
 </html>
