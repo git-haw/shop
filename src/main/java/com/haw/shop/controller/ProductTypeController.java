@@ -2,6 +2,7 @@ package com.haw.shop.controller;
 
 import com.haw.shop.model.ProductType;
 import com.haw.shop.service.ProductTypeService;
+import com.haw.shop.token.LoginToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -25,17 +26,17 @@ public class ProductTypeController {
     @Autowired
     private ProductTypeService productTypeService;
 
-    //    @LoginToken
+    @LoginToken
     @RequestMapping("/view")
     public ModelAndView view(ModelAndView modelAndView) {
         List<ProductType> list0 = productTypeService.selectList(-1);
         List<ProductType> list1 = new ArrayList<>();
         List<Integer> list3 = new ArrayList<>();
-        for(ProductType item: list0){
+        for (ProductType item : list0) {
             List<ProductType> tmp = productTypeService.selectList(item.getId());
             list1.addAll(tmp);
         }
-        for (ProductType item: list1){
+        for (ProductType item : list1) {
             Integer count = productTypeService.countChildren(item.getId());
             list3.add(count);
         }
@@ -46,34 +47,34 @@ public class ProductTypeController {
         return modelAndView;
     }
 
-    //    @LoginToken
+    @LoginToken
     @RequestMapping("/countChildren")
     @ResponseBody
-    public Integer countChildren(@NotNull(message = "父商品分类id不能为空")Integer parentId){
+    public Integer countChildren(@NotNull(message = "父商品分类id不能为空") Integer parentId) {
         Integer count = productTypeService.countChildren(parentId);
         return count;
     }
 
-    //    @LoginToken
+    @LoginToken
     @RequestMapping("/save")
     @ResponseBody
-    public Map saveOrUpdate(ProductType productType){
+    public Map saveOrUpdate(ProductType productType) {
         int i = productTypeService.saveOrUpdate(productType);
         Map map = new HashMap<>();
-        if(i == 1){
+        if (i == 1) {
             map.put("code", 1);
             map.put("msg", "保存成功");
-        }else {
+        } else {
             map.put("code", -1);
             map.put("msg", "保存失败，请重试");
         }
         return map;
     }
 
-    //    @LoginToken
+    @LoginToken
     @RequestMapping("/load")
     @ResponseBody
-    public List load(@NotNull(message = "父商品分类id不能为空")Integer parentId){
+    public List load(@NotNull(message = "父商品分类id不能为空") Integer parentId) {
         List list = productTypeService.selectList(parentId);
         return list;
     }

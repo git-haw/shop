@@ -2,53 +2,27 @@
  * Created by aiwei on 2020-3-18.
  */
 
-function Card(){
+function ViewCard(){
+    Card.call(this);
     //加载下一个card
-    Card.prototype.loadNextCard = function(cardNo,productTypeId){
+    ViewCard.prototype.loadNextCard = function(cardNo,productTypeId){
         Card.prototype.removeCardAfter(cardNo);
         var list = Card.prototype.loadCardData(productTypeId);
         if(list.length==0){
             return;
         }
-        var card = Card.prototype.buildProductTypeList(list,cardNo+1);
+        var card = ViewCard.prototype.buildProductTypeList(list,cardNo+1);
         $("#main").append(card);
         card.on("click",".load",function(){
             var cardNo = $(this).parents('.card').attr('num');
             $("#main .card[num="+cardNo+"] .items .bgcolorgray").css('background-color','#fff');
             $(this).parent().parent().css('background-color','#eee');
             var productTypeId = $(this).children("input[name=id]").val();
-            Card.prototype.loadNextCard(cardNo,productTypeId);
+            ViewCard.prototype.loadNextCard(cardNo,productTypeId);
         });
-    }
-    //移除当前card之后的card
-    Card.prototype.removeCardAfter = function(cardNo){
-        $("#main .card").each(function(i){
-            var num = $(this).attr('num');
-            num = Number(num);
-            if(num>cardNo){
-                $(this).remove();
-            }
-        });
-    }
-    //加载card数据
-    Card.prototype.loadCardData = function(productTypeId){
-        var list;
-        $.ajax({
-            type: "POST",
-            url: "/product_type/load",
-            data: {
-                parentId: productTypeId
-            },
-            dataType: "text",
-            async: false,
-            success: function (data, textStatus) {
-                list = JSON.parse(data);
-            }
-        });
-        return list;
-    }
+    };
     //生成商品分类列表
-    Card.prototype.buildProductTypeList = function(list,cardNo){
+    ViewCard.prototype.buildProductTypeList = function(list,cardNo){
         var card = $('<div class="card" num="'+cardNo+'"></div>');
         var items = $('<div class="items"></div>');
         card.append(items);
@@ -86,7 +60,15 @@ function Card(){
             });
         }
         return card;
-    }
-};
+    };
+}(function(){
+    // 创建一个没有实例方法的类
+    var Super = function(){};
+    Super.prototype = Card.prototype;
+    //将实例作为子类的原型
+    ViewCard.prototype = new Super();
+    // 需要修复下构造函数
+    ViewCard.prototype.constructor = ViewCard;
+})();
 
 

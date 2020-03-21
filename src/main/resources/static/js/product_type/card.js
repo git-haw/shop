@@ -2,29 +2,40 @@
  * Created by aiwei on 2020-3-18.
  */
 
-function Card(){
+function AddCard(){
+    Card.call(this);
+    //添加商品分类标志
+    var g_add_flag=false;
     //加载下一个card
-    Card.prototype.loadNextCard = function(cardNo,productTypeId){
+    AddCard.prototype.loadNextCard = function(cardNo,productTypeId){
         Card.prototype.removeCardAfter(cardNo);
         var list = Card.prototype.loadCardData(productTypeId);
         if(list.length==0){
             return;
         }
-        var card = Card.prototype.buildProductTypeList(list,cardNo+1);
+        var card = AddCard.prototype.buildProductTypeList(list,cardNo+1);
         $("#main").append(card);
         card.on("click",".load",function(){
             var cardNo = $(this).parents('.card').attr('num');
             $("#main .card[num="+cardNo+"] .items .bgcolorgray").css('background-color','#fff');
             $(this).parent().parent().css('background-color','#eee');
             var productTypeId = $(this).children("input[name=id]").val();
-            Card.prototype.loadNextCard(cardNo,productTypeId);
+            AddCard.prototype.loadNextCard(cardNo,productTypeId);
         });
         card.on("click",".saveorupdate>i",function(){
-            Card.prototype.preInitSaveorupdate($(this));
+            AddCard.prototype.preInitSaveorupdate($(this));
         });
-    }
+    };
+    //功能按钮点击
+    AddCard.prototype.saveorupdateClick = function(){
+        $("#main .card .items .saveorupdate>i").each(function (i) {
+            $(this).click(function () {
+                AddCard.prototype.preInitSaveorupdate($(this));
+            });
+        });
+    };
     //添加或者编辑商品类别信息的预处理
-    Card.prototype.preInitSaveorupdate = function(obj){
+    AddCard.prototype.preInitSaveorupdate = function(obj){
         var id = obj.parent().prev().children("input[name=id]").val();
         if(obj.hasClass('glyphicon-plus')){
             $("#parentId").val(id);
@@ -35,36 +46,49 @@ function Card(){
             $("#name").val(name);
             $("#myModalLabel").text('编辑商品分类');
         }
-    }
-    //移除当前card之后的card
-    Card.prototype.removeCardAfter = function(cardNo){
-        $("#main .card").each(function(i){
-            var num = $(this).attr('num');
-            num = Number(num);
-            if(num>cardNo){
-                $(this).remove();
+    };
+    //添加商品分类
+    AddCard.prototype.addProductType = function(){
+        $("#add_product_type").click(function(){
+            $.ajax({
+                type: "POST",
+                url: "/product_type/save",
+                data: {
+                    id: $("#productTypeId").val(),
+                    name: $("#name").val(),
+                    parentId: $("#parentId").val()
+                },
+                dataType: "text",
+                async: false,
+                success: function (data, textStatus) {
+                    data = JSON.parse(data);
+                    $("#msg").text(data.msg);
+                    if(data.code==1){
+                        $("#name").val("");
+                        $("#name").focus();
+                        g_add_flag = true;
+                        if($("#productTypeId").val()!=''){
+                            $('#modal_product_type').modal('hide')
+                        }
+                    }
+                }
+            });
+        });
+    };
+    //关闭添加商品分类模态框
+    AddCard.prototype.modalProductTypeOnHidden = function(){
+        $("#modal_product_type").on("hidden.bs.modal", function(e){
+            $("#productTypeId").val('');
+            $("#name").val('');
+            $("#parentId").val('');
+            $("#msg").text('');
+            if(g_add_flag==true){
+                location.href="/product_type/view";
             }
         });
-    }
-    //加载card数据
-    Card.prototype.loadCardData = function(productTypeId){
-        var list;
-        $.ajax({
-            type: "POST",
-            url: "/product_type/load",
-            data: {
-                parentId: productTypeId
-            },
-            dataType: "text",
-            async: false,
-            success: function (data, textStatus) {
-                list = JSON.parse(data);
-            }
-        });
-        return list;
-    }
+    };
     //生成商品分类列表
-    Card.prototype.buildProductTypeList = function(list,cardNo){
+    AddCard.prototype.buildProductTypeList = function(list,cardNo){
         var card = $('<div class="card" num="'+cardNo+'"></div>');
         var items = $('<div class="items"></div>');
         card.append(items);
@@ -107,10 +131,17 @@ function Card(){
             var i_plus = $('<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
             saveorupdate.append(i_pencil);
             saveorupdate.append(i_plus);
-
         }
         return card;
-    }
-};
+    };
+}(function(){
+    // 创建一个没有实例方法的类
+    var Super = function(){};
+    Super.prototype = Card.prototype;
+    //将实例作为子类的原型
+    AddCard.prototype = new Super();
+    // 需要修复下构造函数
+    AddCard.prototype.constructor = AddCard;
+})();
 
 
