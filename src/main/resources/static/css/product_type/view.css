@@ -8,6 +8,7 @@
     float: left;
     width: 15%;
     border: 1px solid #eee;
+    padding: 10px 0px 10px 5px;
 }
 #main .items{
     width: 100%;
@@ -21,10 +22,12 @@
 #main .card .items>ul>li{
     position: relative;
     display: block;
-    padding: 10px 15px;
-    margin-bottom: -1px;
     background-color: #fff;
-    border-top: 1px dotted #aaa;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+ul.dotted>li{
+    border-bottom: 1px dotted #aaa;
 }
 #main .card .items>ul li{
     list-style: none;
@@ -33,6 +36,7 @@
     display: inline-block;
     cursor: pointer;
     width: 100%;
+    color: rgb(122, 121, 255);
 }
 #main .card .items .itemcontainer>.expand{
     float: left;
@@ -41,7 +45,12 @@
 #main .card .items .itemcontainer>.saveorupdate{
     float: right;
     width: 30%;
-    padding-left: 10px;
+    padding-right: 10px;
+}
+#main .card .items .saveorupdate>i{
+    float: inherit;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 #main .card .items>ul .unvisable{
     display: none;
@@ -49,27 +58,28 @@
 .msg{
     color: red;
 }
-#main .card .items .subcontainer>ul{
-    padding-left: 10px;
-}
-#main .card .items .subcontainer .subitemcontainer{
-    display: inline-block;
+#main .card .items .subcontainer>ul>li{
     cursor: pointer;
+}
+#main .card .items .subitemcontainer{
+    display: inline-block;
     width: 100%;
-}
-#main .card .items .subcontainer .subitemcontainer>.load{
-    float: left;
-    width: 60%;
-}
-#main .card .items .subcontainer .subitemcontainer>.saveorupdate{
-    float: right;
-    width: 40%;
     padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
 }
-#main .card .items .itemcontainer>.load{
+#main .card .items .subitemcontainer>.load{
     float: left;
-    width: 60%;
+    width: 70%;
+}
+#main .card .items .subitemcontainer>.saveorupdate{
+    float: right;
+    width: 30%;
 }
 #main .card .items .bgcolorgray:hover{
     background-color: #eee !important;
+}
+#add_div{
+    text-align: center;
+    margin-top: 10px;
 }

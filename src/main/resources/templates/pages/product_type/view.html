@@ -6,6 +6,7 @@
     <title>商品类别</title>
     <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <link href="/static/plugins/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/common/common.css" rel="stylesheet"/>
     <link href="/static/css/product_type/view.css" rel="stylesheet"/>
     <script src="/static/plugins/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <script src="/static/js/product_type/card.js"></script>
@@ -17,7 +18,7 @@
         <div class="card" num="0">
             <div></div>
             <div class="items">
-                <ul class="">
+                <ul class="dotted">
                     <li th:each="productType0,ptStat0:${list0}">
                         <div class="itemcontainer">
                             <div class="expand">
@@ -27,29 +28,30 @@
                                 <i class="glyphicon glyphicon-chevron-down"></i>
                             </div>
                             <div class="saveorupdate">
-                                <i class="glyphicon glyphicon-plus" data-toggle="modal"
-                                   data-target="#modal_product_type"></i>
                                 <i class="glyphicon glyphicon-pencil" data-toggle="modal"
+                                   data-target="#modal_product_type"></i>
+                                <i class="glyphicon glyphicon-plus" data-toggle="modal"
                                    data-target="#modal_product_type"></i>
                             </div>
                         </div>
                         <div class="subcontainer">
                             <ul class="">
                                 <li th:each="productType1,ptStat1:${list1}"
-                                    th:if="${productType1.parentId==productType0.id}">
-                                    <div class="subitemcontainer bgcolorgray">
+                                    th:if="${productType1.parentId==productType0.id}"
+                                        class="bgcolorgray">
+                                    <div class="subitemcontainer">
                                         <div class="load">
                                             <input type="hidden" name="id" th:value="${productType1.id}">
                                             <input type="hidden" name="parentId" th:value="${productType1.parentId}">
                                             <span th:text="${productType1.name}">士大夫</span>
                                         </div>
                                         <div class="saveorupdate">
-                                            <i class="glyphicon glyphicon-plus" data-toggle="modal"
-                                               data-target="#modal_product_type"></i>
-                                            <i class="glyphicon glyphicon-pencil" data-toggle="modal"
-                                               data-target="#modal_product_type"></i>
                                             <i th:if="${list3[__${ptStat1.index}__]}!=0"
                                                class="glyphicon glyphicon-chevron-right"></i>
+                                            <i class="glyphicon glyphicon-pencil" data-toggle="modal"
+                                               data-target="#modal_product_type"></i>
+                                            <i class="glyphicon glyphicon-plus" data-toggle="modal"
+                                               data-target="#modal_product_type"></i>
                                         </div>
                                     </div>
                                 </li>
@@ -58,7 +60,7 @@
                     </li>
                 </ul>
             </div>
-            <div>
+            <div id="add_div">
                 <button id="add_root_product_type" class="btn btn-default" data-toggle="modal"
                         data-target="#modal_product_type">增加根商品分类
                 </button>
@@ -69,8 +71,8 @@
             <div></div>
             <div class="items">
                 <ul>
-                    <li>
-                        <div class="itemcontainer bgcolorgray">
+                    <li class="bgcolorgray">
+                        <div class="subitemcontainer">
                             <div class="load">
                                 <input type="hidden" name="id"/>
                                 <input type="hidden" name="parentId"/>
@@ -101,7 +103,7 @@
                 </div>
                 <div class="modal-body">
                     <label>商品分类名称：</label>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" class="form-control">
                     <input type="hidden" name="id" id="productTypeId">
                     <input type="hidden" name="parentId" id="parentId">
                     <span id="msg" class="msg"></span>

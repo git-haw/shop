@@ -15,7 +15,7 @@ function Card(){
         card.on("click",".load",function(){
             var cardNo = $(this).parents('.card').attr('num');
             $("#main .card[num="+cardNo+"] .items .bgcolorgray").css('background-color','#fff');
-            $(this).parent().css('background-color','#eee');
+            $(this).parent().parent().css('background-color','#eee');
             var productTypeId = $(this).children("input[name=id]").val();
             Card.prototype.loadNextCard(cardNo,productTypeId);
         });
@@ -72,12 +72,12 @@ function Card(){
         items.append(ul);
         for(var i= 0;i<list.length;i++){
             var item = list[i];
-            var li = $('<li></li>');
+            var li = $('<li class="bgcolorgray"></li>');
             ul.append(li);
-            var itemcontainer = $('<div class="itemcontainer bgcolorgray"></div>');
-            li.append(itemcontainer);
+            var subitemcontainer = $('<div class="subitemcontainer"></div>');
+            li.append(subitemcontainer);
             var load = $('<div class="load"></div>');
-            itemcontainer.append(load);
+            subitemcontainer.append(load);
             var id = $('<input type="hidden" name="id" value="'+item.id+'"/>');
             var parentId = $('<input type="hidden" name="parentId" value="'+item.parentId+'"/>');
             var span = $('<span>'+item.name+'</span>');
@@ -85,11 +85,7 @@ function Card(){
             load.append(parentId);
             load.append(span);
             var saveorupdate = $('<div class="saveorupdate"></div>');
-            itemcontainer.append(saveorupdate);
-            var i_plus = $('<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
-            var i_pencil = $('<i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal_product_type"></i>');
-            saveorupdate.append(i_plus);
-            saveorupdate.append(i_pencil);
+            subitemcontainer.append(saveorupdate);
 
             $.ajax({
                 type: "POST",
@@ -107,6 +103,11 @@ function Card(){
                     }
                 }
             });
+            var i_pencil = $('<i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal_product_type"></i>');
+            var i_plus = $('<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
+            saveorupdate.append(i_pencil);
+            saveorupdate.append(i_plus);
+
         }
         return card;
     }
