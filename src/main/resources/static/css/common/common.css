@@ -1,14 +1,114 @@
-*{
+* {
     margin: 0;
     padding: 0;
     border: 0;
 }
-body{
+
+body {
     font-size: 12px;
     font-family: Arial;
     min-width: 1024px;
     color: #333;
+    margin: 0 auto;
 }
-a{
+
+a {
     text-decoration: none !important;
+}
+
+:focus {
+    outline: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+img {
+    border: none;
+    vertical-align: middle;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* for font & text & tag =================================== */
+.red {
+    color: red !important;
+}
+
+.gray {
+    color: #686868 !important;
+}
+
+.hasDefaultText {
+    color: #999;
+}
+
+.orange {
+    color: #f60 !important;
+}
+
+.green {
+    color: #79a605 !important;
+}
+
+.blue {
+    color: #0057b0 !important;
+}
+
+/* for margin & padding | width & height =================== */
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb18 {
+    margin-bottom: 18px;
+}
+
+.mb22 {
+    margin-bottom: 22px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+.p10 {
+    padding: 10px;
+}
+
+.tc {
+    text-align: center
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+/* class css ============================ class css ======== */
+.fl {
+    float: left;
+    display: inline;
+}
+
+.fr {
+    float: right;
+    display: inline;
+}
+
+.clear {
+    clear: both;
+    height: 0;
+    overflow: hidden;
 }
