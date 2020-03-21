@@ -8,7 +8,8 @@
     float: left;
     width: 15%;
     border: 1px solid #eee;
-    padding: 10px 0px 10px 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 #main .items{
     width: 100%;
@@ -37,6 +38,8 @@ ul.dotted>li{
     cursor: pointer;
     width: 100%;
     color: rgb(122, 121, 255);
+    padding-left: 5px;
+    padding-right: 10px;
 }
 #main .card .items .itemcontainer>.expand{
     float: left;
@@ -45,10 +48,8 @@ ul.dotted>li{
 #main .card .items .itemcontainer>.saveorupdate{
     float: right;
     width: 30%;
-    padding-right: 10px;
 }
 #main .card .items .saveorupdate>i{
-    float: inherit;
     padding-left: 2px;
     padding-right: 2px;
 }
@@ -58,7 +59,7 @@ ul.dotted>li{
 .msg{
     color: red;
 }
-#main .card .items .subcontainer>ul>li{
+.category-item{
     cursor: pointer;
 }
 #main .card .items .subitemcontainer{
@@ -76,8 +77,12 @@ ul.dotted>li{
     float: right;
     width: 30%;
 }
-#main .card .items .bgcolorgray:hover{
-    background-color: #eee !important;
+#main .card .items .category-item:hover{
+    background-color: #f4f4f4 !important;
+}
+#main .card .items .selected{
+    border-left: 2px solid #0085D7;
+    background: #f4f4f4;
 }
 #add_div{
     text-align: center;

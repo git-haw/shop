@@ -17,8 +17,8 @@ function AddCard(){
         $("#main").append(card);
         card.on("click",".load",function(){
             var cardNo = $(this).parents('.card').attr('num');
-            $("#main .card[num="+cardNo+"] .items .bgcolorgray").css('background-color','#fff');
-            $(this).parent().parent().css('background-color','#eee');
+            $("#main .card[num="+cardNo+"] .items .category-item").removeClass("selected");
+            $(this).parent().parent().addClass("selected");
             var productTypeId = $(this).children("input[name=id]").val();
             AddCard.prototype.loadNextCard(cardNo,productTypeId);
         });
@@ -96,7 +96,7 @@ function AddCard(){
         items.append(ul);
         for(var i= 0;i<list.length;i++){
             var item = list[i];
-            var li = $('<li class="bgcolorgray"></li>');
+            var li = $('<li class="category-item"></li>');
             ul.append(li);
             var subitemcontainer = $('<div class="subitemcontainer"></div>');
             li.append(subitemcontainer);
@@ -110,7 +110,10 @@ function AddCard(){
             load.append(span);
             var saveorupdate = $('<div class="saveorupdate"></div>');
             subitemcontainer.append(saveorupdate);
-
+            var i_plus = $('<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
+            var i_pencil = $('<i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal_product_type"></i>');
+            saveorupdate.append(i_plus);
+            saveorupdate.append(i_pencil);
             $.ajax({
                 type: "POST",
                 url: "/product_type/countChildren",
@@ -127,10 +130,6 @@ function AddCard(){
                     }
                 }
             });
-            var i_pencil = $('<i class="glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal_product_type"></i>');
-            var i_plus = $('<i class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#modal_product_type"></i>');
-            saveorupdate.append(i_pencil);
-            saveorupdate.append(i_plus);
         }
         return card;
     };

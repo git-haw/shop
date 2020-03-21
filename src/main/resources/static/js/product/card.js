@@ -15,8 +15,8 @@ function ViewCard(){
         $("#main").append(card);
         card.on("click",".load",function(){
             var cardNo = $(this).parents('.card').attr('num');
-            $("#main .card[num="+cardNo+"] .items .bgcolorgray").css('background-color','#fff');
-            $(this).parent().parent().css('background-color','#eee');
+            $("#main .card[num="+cardNo+"] .items .category-item").removeClass("selected");
+            $(this).parent().parent().addClass("selected");
             var productTypeId = $(this).children("input[name=id]").val();
             ViewCard.prototype.loadNextCard(cardNo,productTypeId);
         });
@@ -30,7 +30,7 @@ function ViewCard(){
         items.append(ul);
         for(var i= 0;i<list.length;i++){
             var item = list[i];
-            var li = $('<li class="bgcolorgray"></li>');
+            var li = $('<li class="category-item"></li>');
             ul.append(li);
             var subitemcontainer = $('<div class="subitemcontainer"></div>');
             li.append(subitemcontainer);

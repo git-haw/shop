@@ -22,10 +22,8 @@ function Card(){
         $("#main .card .items .load").each(function (i) {
             $(this).click(function () {
                 var cardNo = $(this).parents('.card').attr('num');
-                $("#main .card[num=" + cardNo + "] .items .bgcolorgray").each(function () {
-                    $(this).css('background-color', '#fff');
-                });
-                $(this).parent().parent().css('background-color', '#eee');
+                $("#main .card[num="+cardNo+"] .items .category-item").removeClass("selected");
+                $(this).parent().parent().addClass("selected");
                 var productTypeId = $(this).children("input[name=id]").val();
                 card.loadNextCard(Number(cardNo), productTypeId);
             });
