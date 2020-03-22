@@ -83,12 +83,9 @@ public class ShopController {
     @PassToken
     @GetMapping("/view_shop")
     public ModelAndView view_shop(HttpServletRequest request, ModelAndView modelAndView,@NotNull(message = "用户id不能为空") Integer userNumberId) {
-        HttpSession session = request.getSession();
-        Integer userId = (Integer) session.getAttribute("userid");
-        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
-
+        //加载当前登录用户信息
+        Utils.loadUserInfo(request, modelAndView, userService);
         Shop shop = shopService.getShopByUserId(userNumberId);
-        modelAndView.addObject("userInfo", userInfoVo);
         modelAndView.addObject("shop", shop);
         modelAndView.setViewName("pages/shop/view_shop");
         return modelAndView;

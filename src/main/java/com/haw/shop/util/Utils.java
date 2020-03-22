@@ -4,6 +4,7 @@ import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
 import com.haw.shop.vo.UserInfoVo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -91,5 +92,19 @@ public class Utils {
             }
         }
         return cookieMap;
+    }
+
+    /**
+     * 加载当前登录用户信息
+     * @param request
+     * @param modelAndView
+     * @param userService
+     */
+    public static void loadUserInfo(HttpServletRequest request,ModelAndView modelAndView, UserService
+            userService){
+        HttpSession session = request.getSession();
+        Integer userId = (Integer)session.getAttribute("userid");
+        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
+        modelAndView.addObject("userInfo",userInfoVo);
     }
 }

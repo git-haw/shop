@@ -23,10 +23,8 @@ public class IndexController {
     @PassToken
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request,ModelAndView modelAndView){
-        HttpSession session = request.getSession();
-        Integer userId = (Integer)session.getAttribute("userid");
-        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
-        modelAndView.addObject("userInfo",userInfoVo);
+        //加载当前登录用户信息
+        Utils.loadUserInfo(request, modelAndView, userService);
         modelAndView.setViewName("index");
         return modelAndView;
     }

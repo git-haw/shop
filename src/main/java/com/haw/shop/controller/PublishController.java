@@ -2,7 +2,9 @@ package com.haw.shop.controller;
 
 import com.haw.shop.model.ProductType;
 import com.haw.shop.service.ProductTypeService;
+import com.haw.shop.service.UserService;
 import com.haw.shop.token.LoginToken;
+import com.haw.shop.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +21,14 @@ import java.util.List;
 public class PublishController {
     @Autowired
     private ProductTypeService productTypeService;
+    @Autowired
+    private UserService userService;
 
     @LoginToken
     @GetMapping("/publish")
     public ModelAndView publish(HttpServletRequest request,ModelAndView modelAndView){
+        //加载当前登录用户信息
+        Utils.loadUserInfo(request, modelAndView, userService);
         List<ProductType> list0 = productTypeService.selectList(-1);
         List<ProductType> list1 = new ArrayList<>();
         List<Integer> list3 = new ArrayList<>();
