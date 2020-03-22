@@ -17,24 +17,11 @@ function Card(){
             }
         });
     };
-    //二级分类加载
-    Card.prototype.load = function(card){
-        $("#main .card .items .load").each(function (i) {
-            $(this).click(function () {
-                var cardNo = $(this).parents('.card').attr('num');
-                $("#main .card[num="+cardNo+"] .items .category-item").removeClass("selected");
-                $(this).parent().parent().addClass("selected");
-                var productTypeId = $(this).children("input[name=id]").val();
-                card.loadNextCard(Number(cardNo), productTypeId);
-            });
-        });
-    };
+
     //移除当前card之后的card
     Card.prototype.removeCardAfter = function(cardNo){
-        $("#main .card").each(function(i){
-            var num = $(this).attr('num');
-            num = Number(num);
-            if(num>cardNo){
+        $("#main #cards .card").each(function(i){
+            if(i>cardNo){
                 $(this).remove();
             }
         });

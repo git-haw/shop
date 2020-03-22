@@ -6,14 +6,15 @@
 #container #main .card{
     display: inline-block;
     float: left;
-    width: 15%;
+    width: 230px;
+    height: 300px;
     border: 1px solid #eee;
     padding-top: 10px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 #main .items{
     width: 100%;
-    height: 300px;
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }

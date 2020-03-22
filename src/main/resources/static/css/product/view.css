@@ -1,75 +1,149 @@
-#container #main{
-    display: inline-block;
-    float: left;
-    width: 100%;
+#container #main {
+    max-width: 1200px;
+    margin: 0px auto;
 }
-#container #main .card{
+
+#container #main .card {
     display: inline-block;
     float: left;
-    width: 15%;
+    width: 230px;
+    height: 300px;
     border: 1px solid #eee;
     padding-top: 10px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
-#main .items{
+
+#main .items {
     width: 100%;
-    height: 300px;
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }
-li{
+
+li {
 }
-#main .card .items ul{
+
+#main .card .items ul {
     padding-left: 0;
 }
-#main .card .items>ul>li{
+
+#main .card .items > ul > li {
     position: relative;
     display: block;
     background-color: #fff;
     padding-top: 3px;
     padding-bottom: 3px;
 }
-ul.dotted>li{
+
+ul.dotted > li {
     border-bottom: 1px dotted #aaa;
 }
-#main .card .items>ul li{
+
+#main .card .items > ul li {
     list-style: none;
 }
-#main .card .items .itemcontainer{
+
+#main .card .items .itemcontainer {
     display: inline-block;
     cursor: pointer;
     width: 100%;
     color: rgb(122, 121, 255);
     padding-left: 5px;
 }
-#main .card .items .itemcontainer>.expand{
+
+#main .card .items .itemcontainer > .expand {
     float: left;
     width: 100%;
 }
-#main .card .items>ul .unvisable{
+
+#main .card .items > ul .unvisable {
     display: none;
 }
-.msg{
+
+.msg {
     color: red;
 }
-.category-item{
+
+.category-item {
     cursor: pointer;
 }
-#main .card .items .subitemcontainer{
+
+#main .card .items .subitemcontainer {
     display: inline-block;
     width: 100%;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 3px;
 }
-#main .card .items .subitemcontainer>.load{
+
+#main .card .items .subitemcontainer > .load {
     float: left;
     width: 100%;
 }
-#main .card .items .category-item:hover{
+
+#main .card .items .category-item:hover {
     background-color: #f4f4f4 !important;
 }
-#main .card .items .selected{
+
+#main .card .items .selected {
     border-left: 2px solid #0085D7;
     background: #f4f4f4;
+}
+
+.card > .input-card {
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.card > .input-card > input {
+    width: 90%;
+    height: 30px;
+}
+
+#main .logo-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.category-path-wrap {
+    color: #999;
+    border: 1px solid #e8e8e8;
+    background: #f7f8fa;
+    padding: 8px 12px;
+    line-height: 20px;
+    overflow: hidden;
+    font-size: 12px;
+}
+.path-content{
+    display: inline-block;
+}
+.publishDiv{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+.next-btn{
+    padding: 0 16px;
+    height: 40px;
+    line-height: 38px;
+    font-size: 14px;
+    border-radius: 3px;
+    border-width: 1px;
+}
+.next-btn[disabled]{
+    cursor: not-allowed;
+    background-color: #F7F8FA;
+    border-color: #E6E7EB;
+    color: #b9b9b9;
+}
+.next-btn[disabled]:hover{
+    color: #b9b9b9;
+}
+.next-btn-primary{
+    border-style: solid;
+    background-color: #0085D7;
+    border-color: transparent;
+    color: #ffffff;
+}
+.next-btn-primary:hover{
+    color: #ffffff;
 }

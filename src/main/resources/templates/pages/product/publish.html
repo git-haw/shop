@@ -15,66 +15,88 @@
 </head>
 <body>
 <div id="container">
+    <header th:include="pages/index/nav::nav"></header>
     <div id="main">
-        <div class="card" num="0">
-            <div></div>
-            <div class="items">
-                <ul class="dotted">
-                    <li th:each="productType0,ptStat0:${list0}">
-                        <div class="itemcontainer">
-                            <div class="expand">
-                                <input type="hidden" name="id" th:value="${productType0.id}">
-                                <input type="hidden" name="parentId" th:value="${productType0.parentId}">
-                                <span th:text="${productType0.name}">游戏话费</span>
-                                <i class="glyphicon glyphicon-chevron-down"></i>
+        <div class="logo-title">
+            <h3 class="">商品发布</h3>
+        </div>
+        <div id="cards">
+            <div class="card" num="0">
+                <div></div>
+                <div class="items">
+                    <ul class="dotted">
+                        <li th:each="productType0,ptStat0:${list0}">
+                            <div class="itemcontainer">
+                                <div class="expand">
+                                    <input type="hidden" name="id" th:value="${productType0.id}">
+                                    <input type="hidden" name="parentId" th:value="${productType0.parentId}">
+                                    <span th:text="${productType0.name}">游戏话费</span>
+                                    <i class="glyphicon glyphicon-chevron-down"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="subcontainer">
-                            <ul class="">
-                                <li th:each="productType1,ptStat1:${list1}"
-                                    th:if="${productType1.parentId==productType0.id}"
-                                    class="category-item">
-                                    <div class="subitemcontainer">
-                                        <div class="load">
-                                            <input type="hidden" name="id" th:value="${productType1.id}">
-                                            <input type="hidden" name="parentId" th:value="${productType1.parentId}">
-                                            <span th:text="${productType1.name}">士大夫</span>
-                                            <i th:if="${list3[__${ptStat1.index}__]}!=0"
-                                               class="glyphicon glyphicon-chevron-right fr"></i>
+                            <div class="subcontainer">
+                                <ul class="">
+                                    <li th:each="productType1,ptStat1:${list1}"
+                                        th:if="${productType1.parentId==productType0.id}"
+                                        class="category-item">
+                                        <div class="subitemcontainer">
+                                            <div class="load">
+                                                <input type="hidden" name="id" th:value="${productType1.id}">
+                                                <input type="hidden" name="parentId"
+                                                       th:value="${productType1.parentId}">
+                                                <span th:text="${productType1.name}">士大夫</span>
+                                                <i th:if="${list3[__${ptStat1.index}__]}!=0"
+                                                   class="glyphicon glyphicon-chevron-right fr"></i>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--/.card-->
+            <!--<div class="card">
+                <div></div>
+                <div class="items">
+                    <ul>
+                        <li class="bgcolorgray">
+                            <div class="subitemcontainer">
+                                <div class="load">
+                                    <input type="hidden" name="id" th:value="${productType1.id}">
+                                    <input type="hidden" name="parentId" th:value="${productType1.parentId}">
+                                    <span th:text="${productType1.name}">士大夫</span>
+                                    <i th:if="${list3[__${ptStat1.index}__]}!=0"
+                                       class="glyphicon glyphicon-chevron-right fr"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+            <!--/.card-->
+            <!--<div class="card">
+                <div class="input-card">
+                    <p>货号：</p>
+                    <input type="text" class="form-control"/>
+                </div>
+            </div>-->
+        </div>
+        <div class="clear"></div>
+        <div class="category-path-wrap">
+            <div class="path-list">
+                <span class="path-label">已选类目:</span>
+                <div class="path-content"></div>
             </div>
         </div>
-        <!--/.card-->
-        <!--<div class="card">
-            <div></div>
-            <div class="items">
-                <ul>
-                    <li class="bgcolorgray">
-                        <div class="subitemcontainer">
-                            <div class="load">
-                                <input type="hidden" name="id" th:value="${productType1.id}">
-                                <input type="hidden" name="parentId" th:value="${productType1.parentId}">
-                                <span th:text="${productType1.name}">士大夫</span>
-                                <i th:if="${list3[__${ptStat1.index}__]}!=0"
-                                   class="glyphicon glyphicon-chevron-right fr"></i>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>-->
-        <!--/.card-->
-        <!--<div class="card">
-            <p>货号</p>
-            <input type="text" class="form-control"/>
-        </div>-->
+        <div class="publishDiv">
+            <button class="next-btn next-btn-primary" disabled>
+                <span>下一步，发布商品</span>
+            </button>
+        </div>
     </div>
+    <footer th:include="pages/common/footer::footer"></footer>
 </div>
 </body>
 </html>
