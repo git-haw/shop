@@ -27,13 +27,13 @@ function Card(){
         });
     };
     //加载card数据
-    Card.prototype.loadCardData = function(productTypeId){
+    Card.prototype.loadCardData = function(id){
         var list;
         $.ajax({
             type: "POST",
             url: "/product_type/load",
             data: {
-                parentId: productTypeId
+                parentId: id
             },
             dataType: "text",
             async: false,

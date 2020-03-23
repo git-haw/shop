@@ -4,30 +4,10 @@
 
 function ViewCard() {
     Card.call(this);
+    ViewCard.prototype.productTypeIds = [];
     //二级分类加载
     ViewCard.prototype.load = function () {
         $("#main .card .items .load").click(function () {
-            //点击加载
-            ViewCard.prototype.clickLoad($(this));
-        });
-    };
-    //加载下一个card
-    ViewCard.prototype.loadNextCard = function (cardNo, productTypeId) {
-        Card.prototype.removeCardAfter(cardNo);
-        var list = Card.prototype.loadCardData(productTypeId);
-        if (list.length == 0) {
-            //显示输入card
-            var inputCard = ViewCard.prototype.buildInputCard(cardNo + 1);
-            $("#cards").append(inputCard);
-            $(".next-btn").attr('disabled',false);
-            return;
-        }else{
-            $(".next-btn").attr('disabled',true);
-        }
-        //生成商品分类列表
-        var card = ViewCard.prototype.buildProductTypeList(list, cardNo + 1);
-        $("#cards").append(card);
-        card.on("click", ".load", function () {
             //点击加载
             ViewCard.prototype.clickLoad($(this));
         });
@@ -38,15 +18,15 @@ function ViewCard() {
         cardNo = Number(cardNo);
         $("#main .card[num=" + cardNo + "] .items .category-item").removeClass("selected");
         obj.parent().parent().addClass("selected");
-        var productTypeId = obj.children("input[name=id]").val();
+        var id = obj.children("input[name=id]").val();
         var name = obj.children("span").text();
         //类目信息维护
-        ViewCard.prototype.categoryPath(name, cardNo);
+        ViewCard.prototype.categoryPath(id, name, cardNo);
         //加载下一个card
-        ViewCard.prototype.loadNextCard(cardNo, productTypeId);
+        ViewCard.prototype.loadNextCard(cardNo, id);
     };
     //类目信息维护
-    ViewCard.prototype.categoryPath = function (name, cardNo) {
+    ViewCard.prototype.categoryPath = function (id, name, cardNo) {
         $(".path-content>span").each(function (i) {
             if (i >= cardNo) {
                 $(this).remove();
@@ -54,11 +34,33 @@ function ViewCard() {
         });
         if (cardNo == 0) {
             var namespan = $('<span>' + name + '</span>');
-            $(".path-content").append(namespan);
-        }else{
+        } else {
             var namespan = $('<span> > ' + name + '</span>');
-            $(".path-content").append(namespan);
         }
+        $(".path-content").append(namespan);
+        ViewCard.prototype.productTypeIds.splice(cardNo);
+        ViewCard.prototype.productTypeIds.push(id);
+    };
+    //加载下一个card
+    ViewCard.prototype.loadNextCard = function (cardNo, id) {
+        Card.prototype.removeCardAfter(cardNo);
+        var list = Card.prototype.loadCardData(id);
+        if (list.length == 0) {
+            //显示输入card
+            var inputCard = ViewCard.prototype.buildInputCard(cardNo + 1);
+            $("#cards").append(inputCard);
+            $(".next-btn").attr('disabled', false);
+            return;
+        } else {
+            $(".next-btn").attr('disabled', true);
+        }
+        //生成商品分类列表
+        var card = ViewCard.prototype.buildProductTypeList(list, cardNo + 1);
+        $("#cards").append(card);
+        card.on("click", ".load", function () {
+            //点击加载
+            ViewCard.prototype.clickLoad($(this));
+        });
     };
     //生成商品分类列表
     ViewCard.prototype.buildProductTypeList = function (list, cardNo) {

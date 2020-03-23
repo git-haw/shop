@@ -31,7 +31,7 @@ function AddCard() {
         });
     };
     //点击加载
-    ViewCard.prototype.clickLoad = function (obj) {
+    AddCard.prototype.clickLoad = function (obj) {
         var cardNo = obj.parents('.card').attr('num');
         cardNo = Number(cardNo);
         $("#main .card[num=" + cardNo + "] .items .category-item").removeClass("selected");

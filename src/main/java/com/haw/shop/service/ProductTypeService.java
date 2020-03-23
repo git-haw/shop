@@ -3,6 +3,7 @@ package com.haw.shop.service;
 
 import com.haw.shop.model.ProductType;
 import com.haw.shop.model.UserInfo;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface ProductTypeService {
     List<ProductType> selectList(Integer parentId);
     //统计后袋个数
     Integer countChildren(Integer parentId);
+    void loadFirstCard(ModelAndView modelAndView);
+    void publish(ModelAndView modelAndView, String[] productTypeIds);
 }

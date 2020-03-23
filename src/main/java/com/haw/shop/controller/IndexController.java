@@ -2,7 +2,6 @@ package com.haw.shop.controller;
 
 import com.haw.shop.service.UserService;
 import com.haw.shop.token.PassToken;
-import com.haw.shop.util.Utils;
 import com.haw.shop.vo.UserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

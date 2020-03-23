@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,5 +52,33 @@ public class ProductTypeServiceImpl implements ProductTypeService {
         productType.setParentId(parentId);
         Integer count = productTypeMapper.selectCount(productType);
         return count;
+    }
+
+    @Override
+    public void loadFirstCard(ModelAndView modelAndView) {
+        List<ProductType> list0 = this.selectList(-1);
+        List<ProductType> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        for (ProductType item : list0) {
+            List<ProductType> tmp = this.selectList(item.getId());
+            list1.addAll(tmp);
+        }
+        for (ProductType item : list1) {
+            Integer count = this.countChildren(item.getId());
+            list2.add(count);
+        }
+        modelAndView.addObject("list0", list0);
+        modelAndView.addObject("list1", list1);
+        modelAndView.addObject("list2", list2);
+    }
+
+    @Override
+    public void publish(ModelAndView modelAndView, String[] productTypeIds) {
+        List<ProductType> list = new ArrayList<ProductType>();
+        for (String id:productTypeIds){
+            ProductType productType = productTypeMapper.selectByPrimaryKey(Integer.valueOf(id));
+            list.add(productType);
+        }
+        modelAndView.addObject("categoryList",list);
     }
 }

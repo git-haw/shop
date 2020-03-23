@@ -1,0 +1,52 @@
+#header {
+    max-width: 1024px;
+    margin: 20px auto 20px;
+}
+
+#main {
+    margin: 0px auto;
+}
+.sell-wrap {
+    background: #F7F8FA;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+.msg {
+    color: red;
+}
+.logo-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.category-path-wrap {
+
+}
+
+.path-content {
+    display: inline-block;
+}
+
+.sell-float-bottom {
+    z-index: 1000;
+    height: 72px;
+    width: 100%;
+}
+
+.sell-float-bottom {
+    border-top: 2px solid #0085D7;
+    bottom: 0;
+}
+
+.sell-error-board, .sell-float-bottom {
+    background-color: #fff;
+    position: fixed;
+}
+.sell-float-bottom>.com-struct {
+    margin: 18px auto;
+    width: fit-content;
+}
+.sell-float-bottom>.com-struct>.next-btn {
+    margin-left: 18px;
+    width: 160px;
+}

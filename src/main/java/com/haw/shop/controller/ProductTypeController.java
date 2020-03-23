@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,20 +28,7 @@ public class ProductTypeController {
     @LoginToken
     @RequestMapping("/view")
     public ModelAndView view(ModelAndView modelAndView) {
-        List<ProductType> list0 = productTypeService.selectList(-1);
-        List<ProductType> list1 = new ArrayList<>();
-        List<Integer> list3 = new ArrayList<>();
-        for (ProductType item : list0) {
-            List<ProductType> tmp = productTypeService.selectList(item.getId());
-            list1.addAll(tmp);
-        }
-        for (ProductType item : list1) {
-            Integer count = productTypeService.countChildren(item.getId());
-            list3.add(count);
-        }
-        modelAndView.addObject("list0", list0);
-        modelAndView.addObject("list1", list1);
-        modelAndView.addObject("list3", list3);
+        productTypeService.loadFirstCard(modelAndView);
         modelAndView.setViewName("pages/product_type/view");
         return modelAndView;
     }
