@@ -17,18 +17,6 @@ import java.util.Map;
  * Created by aiwei on 2020-3-19.
  */
 public class Utils {
-    public static UserInfoVo buildUserInfoVo(Integer userId, UserService userService) {
-        UserInfoVo userInfoVo = new UserInfoVo();
-        if (userId != null) {
-            UserInfo userInfo = userService.getUser(userId);
-            BeanUtils.copyProperties(userInfo, userInfoVo);
-            userInfoVo.setIsLogin(true);
-        } else {
-            userInfoVo.setIsLogin(false);
-        }
-        return userInfoVo;
-    }
-
     /**
      * 设置cookie
      *
@@ -94,17 +82,4 @@ public class Utils {
         return cookieMap;
     }
 
-    /**
-     * 加载当前登录用户信息
-     * @param request
-     * @param modelAndView
-     * @param userService
-     */
-    public static void loadUserInfo(HttpServletRequest request,ModelAndView modelAndView, UserService
-            userService){
-        HttpSession session = request.getSession();
-        Integer userId = (Integer)session.getAttribute("userid");
-        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
-        modelAndView.addObject("userInfo",userInfoVo);
-    }
 }

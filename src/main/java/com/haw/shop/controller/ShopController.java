@@ -84,7 +84,7 @@ public class ShopController {
     @GetMapping("/view_shop")
     public ModelAndView view_shop(HttpServletRequest request, ModelAndView modelAndView,@NotNull(message = "用户id不能为空") Integer userNumberId) {
         //加载当前登录用户信息
-        Utils.loadUserInfo(request, modelAndView, userService);
+        userService.loadUserInfo(request, modelAndView);
         Shop shop = shopService.getShopByUserId(userNumberId);
         modelAndView.addObject("shop", shop);
         modelAndView.setViewName("pages/shop/view_shop");

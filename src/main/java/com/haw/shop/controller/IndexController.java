@@ -24,7 +24,7 @@ public class IndexController {
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request,ModelAndView modelAndView){
         //加载当前登录用户信息
-        Utils.loadUserInfo(request, modelAndView, userService);
+        userService.loadUserInfo(request, modelAndView);
         modelAndView.setViewName("index");
         return modelAndView;
     }
@@ -34,7 +34,7 @@ public class IndexController {
     public ModelAndView register(HttpServletRequest request,ModelAndView modelAndView){
         HttpSession session = request.getSession();
         Integer userId = (Integer)session.getAttribute("userid");
-        UserInfoVo userInfoVo = Utils.buildUserInfoVo(userId, userService);
+        UserInfoVo userInfoVo = userService.buildUserInfoVo(userId);
         modelAndView.addObject("userInfo",userInfoVo);
         return modelAndView;
     }

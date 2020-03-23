@@ -4,11 +4,16 @@ import com.haw.shop.mapper.UserInfoMapper;
 import com.haw.shop.model.UserInfo;
 import com.haw.shop.service.UserService;
 import com.haw.shop.token.TokenUtil;
+import com.haw.shop.vo.UserInfoVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
@@ -61,4 +66,29 @@ public class UserServiceImpl implements UserService {
         return rst2;
     }
 
+    @Override
+    public UserInfoVo buildUserInfoVo(Integer userId) {
+        UserInfoVo userInfoVo = new UserInfoVo();
+        if (userId != null) {
+            UserInfo userInfo = this.getUser(userId);
+            BeanUtils.copyProperties(userInfo, userInfoVo);
+            userInfoVo.setIsLogin(true);
+        } else {
+            userInfoVo.setIsLogin(false);
+        }
+        return userInfoVo;
+    }
+
+    /**
+     * 加载当前登录用户信息
+     * @param request
+     * @param modelAndView
+     */
+    @Override
+    public void loadUserInfo(HttpServletRequest request, ModelAndView modelAndView) {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer)session.getAttribute("userid");
+        UserInfoVo userInfoVo = this.buildUserInfoVo(userId);
+        modelAndView.addObject("userInfo",userInfoVo);
+    }
 }
